@@ -1,0 +1,178 @@
+\doxysection{tile Class Reference}
+\label{classtile}\index{tile@{tile}}
+
+
+{\ttfamily \#include $<$board.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ tile} (SDL\+\_\+\+Rect pos, SDL\+\_\+\+Surface $\ast$bg, SDL\+\_\+\+Surface $\ast$focused, Uint8 lx, Uint8 ly)
+\item 
+\textbf{ $\sim$tile} ()
+\item 
+void \textbf{ set\+\_\+tile} (SDL\+\_\+\+Surface $\ast$t, SDL\+\_\+\+Surface $\ast$t2)
+\begin{DoxyCompactList}\small\item\em change the tile (used when changing the board\textquotesingle{}s map) \end{DoxyCompactList}\item 
+void \textbf{ display} ()
+\begin{DoxyCompactList}\small\item\em display on screen \end{DoxyCompactList}\item 
+Uint8 \textbf{ get\+\_\+x} ()
+\begin{DoxyCompactList}\small\item\em return x coordinate (in grid of tiles) \end{DoxyCompactList}\item 
+Uint8 \textbf{ get\+\_\+y} ()
+\begin{DoxyCompactList}\small\item\em return y coordinate (in grid of tiles) \end{DoxyCompactList}\item 
+void \textbf{ flip} (SDL\+\_\+\+Surface $\ast$s)
+\begin{DoxyCompactList}\small\item\em change the not focused surface (if not a hole) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ is\+\_\+in} (Sint32 \textbf{ x}, Sint32 \textbf{ y})
+\begin{DoxyCompactList}\small\item\em are this coordinates inside this tile ? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+SDL\+\_\+\+Rect \textbf{ position}
+\begin{DoxyCompactList}\small\item\em position on screen \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ bg\+\_\+focused}
+\begin{DoxyCompactList}\small\item\em background surface when mouse focus \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ bg\+\_\+not\+\_\+focused}
+\begin{DoxyCompactList}\small\item\em background surface when not focused \end{DoxyCompactList}\item 
+Uint8 \textbf{ x}
+\begin{DoxyCompactList}\small\item\em tile x \end{DoxyCompactList}\item 
+Uint8 \textbf{ y}
+\begin{DoxyCompactList}\small\item\em tile y \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{classtile_a5354789527c507e9a7ba5de1add75c33}} 
+\index{tile@{tile}!tile@{tile}}
+\index{tile@{tile}!tile@{tile}}
+\doxysubsubsection{tile()}
+{\footnotesize\ttfamily tile\+::tile (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Rect}]{pos,  }\item[{SDL\+\_\+\+Surface $\ast$}]{bg,  }\item[{SDL\+\_\+\+Surface $\ast$}]{focused,  }\item[{Uint8}]{lx,  }\item[{Uint8}]{ly }\end{DoxyParamCaption})}
+
+\mbox{\label{classtile_afbef14bff799cec1be0b2d504d66507b}} 
+\index{tile@{tile}!````~tile@{$\sim$tile}}
+\index{````~tile@{$\sim$tile}!tile@{tile}}
+\doxysubsubsection{$\sim$tile()}
+{\footnotesize\ttfamily tile\+::$\sim$tile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{classtile_a3a084f3f013d33a633ccbd5e026cfcc5}} 
+\index{tile@{tile}!display@{display}}
+\index{display@{display}!tile@{tile}}
+\doxysubsubsection{display()}
+{\footnotesize\ttfamily void tile\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+display on screen 
+
+\mbox{\label{classtile_a2f3bb262c8ae05358fe2ed289087fe39}} 
+\index{tile@{tile}!flip@{flip}}
+\index{flip@{flip}!tile@{tile}}
+\doxysubsubsection{flip()}
+{\footnotesize\ttfamily void tile\+::flip (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Surface $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+change the not focused surface (if not a hole) 
+
+\mbox{\label{classtile_ab5a7edfaf345e08eced311c94df6326a}} 
+\index{tile@{tile}!get\_x@{get\_x}}
+\index{get\_x@{get\_x}!tile@{tile}}
+\doxysubsubsection{get\_x()}
+{\footnotesize\ttfamily Uint8 tile\+::get\+\_\+x (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return x coordinate (in grid of tiles) 
+
+\mbox{\label{classtile_a8742c58605a92984f42794dbaff664bc}} 
+\index{tile@{tile}!get\_y@{get\_y}}
+\index{get\_y@{get\_y}!tile@{tile}}
+\doxysubsubsection{get\_y()}
+{\footnotesize\ttfamily Uint8 tile\+::get\+\_\+y (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return y coordinate (in grid of tiles) 
+
+\mbox{\label{classtile_af949e6ed5069ef3d96f62863741b502d}} 
+\index{tile@{tile}!is\_in@{is\_in}}
+\index{is\_in@{is\_in}!tile@{tile}}
+\doxysubsubsection{is\_in()}
+{\footnotesize\ttfamily bool tile\+::is\+\_\+in (\begin{DoxyParamCaption}\item[{Sint32}]{x,  }\item[{Sint32}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+are this coordinates inside this tile ? 
+
+\mbox{\label{classtile_a967bf7d0cca1cc4485ae61228a9c58f8}} 
+\index{tile@{tile}!set\_tile@{set\_tile}}
+\index{set\_tile@{set\_tile}!tile@{tile}}
+\doxysubsubsection{set\_tile()}
+{\footnotesize\ttfamily void tile\+::set\+\_\+tile (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Surface $\ast$}]{t,  }\item[{SDL\+\_\+\+Surface $\ast$}]{t2 }\end{DoxyParamCaption})}
+
+
+
+change the tile (used when changing the board\textquotesingle{}s map) 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{classtile_abfcabbd122ef20528f70e0b0603e15ea}} 
+\index{tile@{tile}!bg\_focused@{bg\_focused}}
+\index{bg\_focused@{bg\_focused}!tile@{tile}}
+\doxysubsubsection{bg\_focused}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ tile\+::bg\+\_\+focused\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+background surface when mouse focus 
+
+\mbox{\label{classtile_a912bc7aabed365971955387781b42239}} 
+\index{tile@{tile}!bg\_not\_focused@{bg\_not\_focused}}
+\index{bg\_not\_focused@{bg\_not\_focused}!tile@{tile}}
+\doxysubsubsection{bg\_not\_focused}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ tile\+::bg\+\_\+not\+\_\+focused\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+background surface when not focused 
+
+\mbox{\label{classtile_a04affd59fa6f71e748f962f2488e288d}} 
+\index{tile@{tile}!position@{position}}
+\index{position@{position}!tile@{tile}}
+\doxysubsubsection{position}
+{\footnotesize\ttfamily SDL\+\_\+\+Rect tile\+::position\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+position on screen 
+
+\mbox{\label{classtile_a4d2b46103c6cf71bbf640c3637f64b84}} 
+\index{tile@{tile}!x@{x}}
+\index{x@{x}!tile@{tile}}
+\doxysubsubsection{x}
+{\footnotesize\ttfamily Uint8 tile\+::x\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile x 
+
+\mbox{\label{classtile_a167890de6b6d419eddfbbbdf33084151}} 
+\index{tile@{tile}!y@{y}}
+\index{y@{y}!tile@{tile}}
+\doxysubsubsection{y}
+{\footnotesize\ttfamily Uint8 tile\+::y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile y 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ board.\+h}\item 
+\textbf{ board.\+cc}\end{DoxyCompactItemize}

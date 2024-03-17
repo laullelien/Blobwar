@@ -1,0 +1,29 @@
+<map id="rules.h" name="rules.h">
+<area shape="rect" id="node1" title=" " alt="" coords="225,5,292,32"/>
+<area shape="rect" id="node2" href="$common_8h.html" title=" " alt="" coords="503,453,593,480"/>
+<area shape="rect" id="node13" href="$move_8h.html" title=" " alt="" coords="977,528,1047,555"/>
+<area shape="rect" id="node14" href="$bidiarray_8h.html" title=" " alt="" coords="43,155,133,181"/>
+<area shape="rect" id="node15" href="$board_8h.html" title=" " alt="" coords="223,80,294,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="503,603,561,629"/>
+<area shape="rect" id="node4" title=" " alt="" coords="91,528,191,555"/>
+<area shape="rect" id="node5" title=" " alt="" coords="215,528,286,555"/>
+<area shape="rect" id="node6" title=" " alt="" coords="310,528,381,555"/>
+<area shape="rect" id="node7" title=" " alt="" coords="405,528,480,555"/>
+<area shape="rect" id="node8" title=" " alt="" coords="504,528,584,555"/>
+<area shape="rect" id="node9" title=" " alt="" coords="608,528,715,555"/>
+<area shape="rect" id="node10" title=" " alt="" coords="739,528,781,555"/>
+<area shape="rect" id="node11" title=" " alt="" coords="806,528,866,555"/>
+<area shape="rect" id="node12" title=" " alt="" coords="890,528,953,555"/>
+<area shape="rect" id="node16" href="$blob_8h.html" title=" " alt="" coords="158,155,221,181"/>
+<area shape="rect" id="node18" href="$blobwar_8h.html" title=" " alt="" coords="367,155,452,181"/>
+<area shape="rect" id="node22" href="$rollover_8h.html" title=" " alt="" coords="429,304,512,331"/>
+<area shape="rect" id="node17" href="$widget_8h.html" title=" " alt="" coords="325,379,403,405"/>
+<area shape="rect" id="node19" href="$font_8h.html" title=" " alt="" coords="833,229,893,256"/>
+<area shape="rect" id="node21" href="$mouse_8h.html" title=" " alt="" coords="567,229,646,256"/>
+<area shape="rect" id="node23" href="$button_8h.html" title=" " alt="" coords="467,229,543,256"/>
+<area shape="rect" id="node24" href="$image_8h.html" title=" " alt="" coords="227,229,301,256"/>
+<area shape="rect" id="node25" href="$label_8h.html" title=" " alt="" coords="376,229,443,256"/>
+<area shape="rect" id="node26" href="$network_8h.html" title=" " alt="" coords="670,229,757,256"/>
+<area shape="rect" id="node20" title=" " alt="" coords="883,304,963,331"/>
+<area shape="rect" id="node27" title=" " alt="" coords="589,304,675,331"/>
+</map>

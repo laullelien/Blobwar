@@ -1,0 +1,94 @@
+\doxysection{player Class Reference}
+\label{classplayer}\index{player@{player}}
+
+
+{\ttfamily \#include $<$rules.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ player} (Uint16 id, Uint8 type)
+\item 
+bool \textbf{ is\+\_\+human} ()
+\begin{DoxyCompactList}\small\item\em is this player human and playing locally ? \end{DoxyCompactList}\item 
+bool \textbf{ is\+\_\+computer} ()
+\begin{DoxyCompactList}\small\item\em is this player a local computer ? \end{DoxyCompactList}\item 
+\textbf{ $\sim$player} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Uint16 \textbf{ player\+\_\+id}
+\begin{DoxyCompactList}\small\item\em our id \end{DoxyCompactList}\item 
+Uint8 \textbf{ player\+\_\+type}
+\begin{DoxyCompactList}\small\item\em are we local human (0), local IA (1), network player (2) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+player class all different type of players (human, ia, networked) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{classplayer_aa571958f217f51595ec053bd8edcf497}} 
+\index{player@{player}!player@{player}}
+\index{player@{player}!player@{player}}
+\doxysubsubsection{player()}
+{\footnotesize\ttfamily player\+::player (\begin{DoxyParamCaption}\item[{Uint16}]{id,  }\item[{Uint8}]{type }\end{DoxyParamCaption})}
+
+\mbox{\label{classplayer_aab5d2e47b80e0481f09ca0df8b823057}} 
+\index{player@{player}!````~player@{$\sim$player}}
+\index{````~player@{$\sim$player}!player@{player}}
+\doxysubsubsection{$\sim$player()}
+{\footnotesize\ttfamily player\+::$\sim$player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{classplayer_a9fb95327698c58b0288e6d3c2697b831}} 
+\index{player@{player}!is\_computer@{is\_computer}}
+\index{is\_computer@{is\_computer}!player@{player}}
+\doxysubsubsection{is\_computer()}
+{\footnotesize\ttfamily bool player\+::is\+\_\+computer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+is this player a local computer ? 
+
+\mbox{\label{classplayer_a6da40551a2a190e94ceb0a9b88de4751}} 
+\index{player@{player}!is\_human@{is\_human}}
+\index{is\_human@{is\_human}!player@{player}}
+\doxysubsubsection{is\_human()}
+{\footnotesize\ttfamily bool player\+::is\+\_\+human (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+is this player human and playing locally ? 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{classplayer_ab105765936da47dfa1919f867926ecd3}} 
+\index{player@{player}!player\_id@{player\_id}}
+\index{player\_id@{player\_id}!player@{player}}
+\doxysubsubsection{player\_id}
+{\footnotesize\ttfamily Uint16 player\+::player\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+our id 
+
+\mbox{\label{classplayer_a31ca39651d8817b25d39ad0366d83772}} 
+\index{player@{player}!player\_type@{player\_type}}
+\index{player\_type@{player\_type}!player@{player}}
+\doxysubsubsection{player\_type}
+{\footnotesize\ttfamily Uint8 player\+::player\+\_\+type\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+are we local human (0), local IA (1), network player (2) 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ rules.\+h}\item 
+\textbf{ rules.\+cc}\end{DoxyCompactItemize}

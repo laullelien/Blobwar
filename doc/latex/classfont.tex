@@ -1,0 +1,97 @@
+\doxysection{font Class Reference}
+\label{classfont}\index{font@{font}}
+
+
+{\ttfamily \#include $<$font.\+h$>$}
+
+
+
+Collaboration diagram for font\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=106pt]{classfont__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ font} (string filename, SDL\+\_\+\+Color foreground, SDL\+\_\+\+Color background, int fontsize)
+\begin{DoxyCompactList}\small\item\em constructor (constructs also all characters) \end{DoxyCompactList}\item 
+\textbf{ $\sim$font} ()
+\begin{DoxyCompactList}\small\item\em destructor \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ render\+\_\+text} (string text)
+\begin{DoxyCompactList}\small\item\em main use of this class \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ y}
+\begin{DoxyCompactList}\small\item\em height of all chars \end{DoxyCompactList}\item 
+\textbf{ character} $\ast$ \textbf{ chars} [96]
+\begin{DoxyCompactList}\small\item\em pointers on all chars \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{classfont_acc165bca4b84a760091d0a718fe31be9}} 
+\index{font@{font}!font@{font}}
+\index{font@{font}!font@{font}}
+\doxysubsubsection{font()}
+{\footnotesize\ttfamily font\+::font (\begin{DoxyParamCaption}\item[{string}]{filename,  }\item[{SDL\+\_\+\+Color}]{foreground,  }\item[{SDL\+\_\+\+Color}]{background,  }\item[{int}]{fontsize }\end{DoxyParamCaption})}
+
+
+
+constructor (constructs also all characters) 
+
+constructs all chars \mbox{\label{classfont_aabbcc237d4244dfc0efe4b2fb0b2b584}} 
+\index{font@{font}!````~font@{$\sim$font}}
+\index{````~font@{$\sim$font}!font@{font}}
+\doxysubsubsection{$\sim$font()}
+{\footnotesize\ttfamily font\+::$\sim$font (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+destructor 
+
+frees all mem 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{classfont_a3bceb5b0ceeb5f7550bdb4eddd2b3bab}} 
+\index{font@{font}!render\_text@{render\_text}}
+\index{render\_text@{render\_text}!font@{font}}
+\doxysubsubsection{render\_text()}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface $\ast$ font\+::render\+\_\+text (\begin{DoxyParamCaption}\item[{string}]{text }\end{DoxyParamCaption})}
+
+
+
+main use of this class 
+
+this method renders the text using the color allocated in the font 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{classfont_aeeaafee22e53619833df21eb35f385b2}} 
+\index{font@{font}!chars@{chars}}
+\index{chars@{chars}!font@{font}}
+\doxysubsubsection{chars}
+{\footnotesize\ttfamily \textbf{ character}$\ast$ font\+::chars[96]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+pointers on all chars 
+
+\mbox{\label{classfont_a2c60bec52607bcd4f301e3e126222aa4}} 
+\index{font@{font}!y@{y}}
+\index{y@{y}!font@{font}}
+\doxysubsubsection{y}
+{\footnotesize\ttfamily int font\+::y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+height of all chars 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ font.\+h}\item 
+\textbf{ font.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,113 @@
+\doxysection{shmem.\+cc File Reference}
+\label{shmem_8cc}\index{shmem.cc@{shmem.cc}}
+{\ttfamily \#include \char`\"{}shmem.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+{\ttfamily \#include $<$sys/shm.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+Include dependency graph for shmem.\+cc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shmem_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SHMEM\+\_\+\+KEY1}~425678
+\item 
+\#define \textbf{ SHMEM\+\_\+\+KEY2}~425679
+\item 
+\#define \textbf{ SHMEM\+\_\+\+KEY3}~425680
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ shmem\+\_\+init} (bool init\+\_\+move)
+\item 
+\textbf{ movement} \textbf{ shmem\+\_\+get} ()
+\begin{DoxyCompactList}\small\item\em return the last save move \end{DoxyCompactList}\item 
+void \textbf{ shmem\+\_\+set} (\textbf{ movement} \&m)
+\begin{DoxyCompactList}\small\item\em save a new move \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int $\ast$ \textbf{ first\+\_\+is\+\_\+new} = NULL
+\item 
+\textbf{ movement} $\ast$ \textbf{ first} = NULL
+\item 
+\textbf{ movement} $\ast$ \textbf{ second} = NULL
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{shmem_8cc_a6c78a9777865f1cdc63b6c28f2ca7535}} 
+\index{shmem.cc@{shmem.cc}!SHMEM\_KEY1@{SHMEM\_KEY1}}
+\index{SHMEM\_KEY1@{SHMEM\_KEY1}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{SHMEM\_KEY1}
+{\footnotesize\ttfamily \#define SHMEM\+\_\+\+KEY1~425678}
+
+\mbox{\label{shmem_8cc_a3cee7d84d56caff70daf81c8b88ead85}} 
+\index{shmem.cc@{shmem.cc}!SHMEM\_KEY2@{SHMEM\_KEY2}}
+\index{SHMEM\_KEY2@{SHMEM\_KEY2}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{SHMEM\_KEY2}
+{\footnotesize\ttfamily \#define SHMEM\+\_\+\+KEY2~425679}
+
+\mbox{\label{shmem_8cc_a9534ce321e6f29e214f8e6bef808673e}} 
+\index{shmem.cc@{shmem.cc}!SHMEM\_KEY3@{SHMEM\_KEY3}}
+\index{SHMEM\_KEY3@{SHMEM\_KEY3}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{SHMEM\_KEY3}
+{\footnotesize\ttfamily \#define SHMEM\+\_\+\+KEY3~425680}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{shmem_8cc_a4f6a33531362bb93af9b0ca51ecac0e9}} 
+\index{shmem.cc@{shmem.cc}!shmem\_get@{shmem\_get}}
+\index{shmem\_get@{shmem\_get}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{shmem\_get()}
+{\footnotesize\ttfamily \textbf{ movement} shmem\+\_\+get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return the last save move 
+
+\mbox{\label{shmem_8cc_a0eee9d0522123510cadc90a7043c2f1c}} 
+\index{shmem.cc@{shmem.cc}!shmem\_init@{shmem\_init}}
+\index{shmem\_init@{shmem\_init}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{shmem\_init()}
+{\footnotesize\ttfamily void shmem\+\_\+init (\begin{DoxyParamCaption}\item[{bool}]{init\+\_\+move = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Share memory between 2 process (blobwar and launch\+Strategy). should be called first if init\+\_\+move is true, the move will be set to 0,0,0,0 \mbox{\label{shmem_8cc_aca140ff409c411f8b03014ac4a185497}} 
+\index{shmem.cc@{shmem.cc}!shmem\_set@{shmem\_set}}
+\index{shmem\_set@{shmem\_set}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{shmem\_set()}
+{\footnotesize\ttfamily void shmem\+\_\+set (\begin{DoxyParamCaption}\item[{\textbf{ movement} \&}]{m }\end{DoxyParamCaption})}
+
+
+
+save a new move 
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{shmem_8cc_ab3211d845d968147e8715a6dc3a7d72c}} 
+\index{shmem.cc@{shmem.cc}!first@{first}}
+\index{first@{first}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{first}
+{\footnotesize\ttfamily \textbf{ movement}$\ast$ first = NULL}
+
+\mbox{\label{shmem_8cc_a7ef4af83e85fb167938352332aa40ab9}} 
+\index{shmem.cc@{shmem.cc}!first\_is\_new@{first\_is\_new}}
+\index{first\_is\_new@{first\_is\_new}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{first\_is\_new}
+{\footnotesize\ttfamily int$\ast$ first\+\_\+is\+\_\+new = NULL}
+
+\mbox{\label{shmem_8cc_a9ef043e43708f44a5b35b5230f550a90}} 
+\index{shmem.cc@{shmem.cc}!second@{second}}
+\index{second@{second}!shmem.cc@{shmem.cc}}
+\doxysubsubsection{second}
+{\footnotesize\ttfamily \textbf{ movement}$\ast$ second = NULL}
+

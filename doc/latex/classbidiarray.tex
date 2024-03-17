@@ -1,0 +1,107 @@
+\doxysection{bidiarray$<$ element\+\_\+type $>$ Class Template Reference}
+\label{classbidiarray}\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+
+
+{\ttfamily \#include $<$bidiarray.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ bidiarray} ()
+\item 
+\textbf{ $\sim$bidiarray} ()
+\item 
+void \textbf{ set} (unsigned int x, unsigned int y, element\+\_\+type value)
+\item 
+element\+\_\+type \textbf{ get} (unsigned int x, unsigned int y) const
+\item 
+void \textbf{ display} ()
+\item 
+string \textbf{ serialize} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \textbf{ bidiarray} \textbf{ deserialize} (string r)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+element\+\_\+type \textbf{ array} [8][8]
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class element\+\_\+type$>$\newline
+class bidiarray$<$ element\+\_\+type $>$}
+
+bidiarray class A 2D array the size of a blobwar map (8x8). 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{classbidiarray_a4e819135b3a735475b3a4dd45ce3d87d}} 
+\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}!bidiarray@{bidiarray}}
+\index{bidiarray@{bidiarray}!bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+\doxysubsubsection{bidiarray()}
+{\footnotesize\ttfamily template$<$class element\+\_\+type $>$ \\
+\textbf{ bidiarray}$<$ element\+\_\+type $>$\+::\textbf{ bidiarray} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{classbidiarray_a56570df38adaabb18d692f917d812fba}} 
+\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}!````~bidiarray@{$\sim$bidiarray}}
+\index{````~bidiarray@{$\sim$bidiarray}!bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+\doxysubsubsection{$\sim$bidiarray()}
+{\footnotesize\ttfamily template$<$class element\+\_\+type $>$ \\
+\textbf{ bidiarray}$<$ element\+\_\+type $>$\+::$\sim$\textbf{ bidiarray} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{classbidiarray_acd1798fe95616aab785535050a372175}} 
+\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}!deserialize@{deserialize}}
+\index{deserialize@{deserialize}!bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+\doxysubsubsection{deserialize()}
+{\footnotesize\ttfamily template$<$class element\+\_\+type $>$ \\
+static \textbf{ bidiarray} \textbf{ bidiarray}$<$ element\+\_\+type $>$\+::deserialize (\begin{DoxyParamCaption}\item[{string}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{classbidiarray_ae0d64e2e6ae7e50745dd2315495edf8b}} 
+\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}!display@{display}}
+\index{display@{display}!bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+\doxysubsubsection{display()}
+{\footnotesize\ttfamily template$<$class element\+\_\+type $>$ \\
+void \textbf{ bidiarray}$<$ element\+\_\+type $>$\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{classbidiarray_ae609b0fb00ea3b2b11998d0396e68f1f}} 
+\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}!get@{get}}
+\index{get@{get}!bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+\doxysubsubsection{get()}
+{\footnotesize\ttfamily template$<$class element\+\_\+type $>$ \\
+element\+\_\+type \textbf{ bidiarray}$<$ element\+\_\+type $>$\+::get (\begin{DoxyParamCaption}\item[{unsigned int}]{x,  }\item[{unsigned int}]{y }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{classbidiarray_a0448c16d842ab3b24da29a2e4485e83b}} 
+\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}!serialize@{serialize}}
+\index{serialize@{serialize}!bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+\doxysubsubsection{serialize()}
+{\footnotesize\ttfamily template$<$class element\+\_\+type $>$ \\
+string \textbf{ bidiarray}$<$ element\+\_\+type $>$\+::serialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{classbidiarray_a870c61207979944c89fff1acf546ac91}} 
+\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}!set@{set}}
+\index{set@{set}!bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+\doxysubsubsection{set()}
+{\footnotesize\ttfamily template$<$class element\+\_\+type $>$ \\
+void \textbf{ bidiarray}$<$ element\+\_\+type $>$\+::set (\begin{DoxyParamCaption}\item[{unsigned int}]{x,  }\item[{unsigned int}]{y,  }\item[{element\+\_\+type}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{classbidiarray_a1880c9988f5f503af1c909c090e05bca}} 
+\index{bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}!array@{array}}
+\index{array@{array}!bidiarray$<$ element\_type $>$@{bidiarray$<$ element\_type $>$}}
+\doxysubsubsection{array}
+{\footnotesize\ttfamily template$<$class element\+\_\+type $>$ \\
+element\+\_\+type \textbf{ bidiarray}$<$ element\+\_\+type $>$\+::array[8][8]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ bidiarray.\+h}\end{DoxyCompactItemize}

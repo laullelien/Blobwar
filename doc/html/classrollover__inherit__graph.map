@@ -1,0 +1,6 @@
+<map id="rollover" name="rollover">
+<area shape="rect" id="node1" title=" " alt="" coords="41,80,113,107"/>
+<area shape="rect" id="node3" href="$classboard.html" title=" " alt="" coords="5,155,64,181"/>
+<area shape="rect" id="node4" href="$classbutton.html" title=" " alt="" coords="88,155,152,181"/>
+<area shape="rect" id="node2" href="$classwidget.html" title=" " alt="" coords="44,5,111,32"/>
+</map>

@@ -1,0 +1,261 @@
+\doxysection{mouse Class Reference}
+\label{classmouse}\index{mouse@{mouse}}
+
+
+{\ttfamily \#include $<$mouse.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ mouse} ()
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\textbf{ $\sim$mouse} ()
+\begin{DoxyCompactList}\small\item\em destructor \end{DoxyCompactList}\item 
+void \textbf{ move} (SDL\+\_\+\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em handles moving and displaying \end{DoxyCompactList}\item 
+void \textbf{ move} (Sint32 x, Sint32 y)
+\begin{DoxyCompactList}\small\item\em handles moving and displaying \end{DoxyCompactList}\item 
+void \textbf{ display} ()
+\begin{DoxyCompactList}\small\item\em doesn\textquotesingle{}t move but redraws mouse \end{DoxyCompactList}\item 
+void \textbf{ enable} ()
+\begin{DoxyCompactList}\small\item\em activate mouse handling \end{DoxyCompactList}\item 
+void \textbf{ disable} ()
+\begin{DoxyCompactList}\small\item\em deactivate mouse handling \end{DoxyCompactList}\item 
+void \textbf{ register\+\_\+rollover} (\textbf{ rollover} $\ast$r)
+\begin{DoxyCompactList}\small\item\em add a new rollover to monitor to our list \end{DoxyCompactList}\item 
+void \textbf{ unregister\+\_\+rollover} (\textbf{ rollover} $\ast$r)
+\begin{DoxyCompactList}\small\item\em remove rollover to monitor from our list \end{DoxyCompactList}\item 
+void \textbf{ recompute\+\_\+focuses} ()
+\begin{DoxyCompactList}\small\item\em update rollovers according to mouse position \end{DoxyCompactList}\item 
+void \textbf{ click} ()
+\begin{DoxyCompactList}\small\item\em click \end{DoxyCompactList}\item 
+Sint16 \textbf{ get\+\_\+x} ()
+\begin{DoxyCompactList}\small\item\em get current mouse x coordinate \end{DoxyCompactList}\item 
+Sint16 \textbf{ get\+\_\+y} ()
+\begin{DoxyCompactList}\small\item\em get current mouse y coordinate \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+SDL\+\_\+\+Rect \textbf{ mousepos}
+\begin{DoxyCompactList}\small\item\em last mouse coordinates \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ image}
+\begin{DoxyCompactList}\small\item\em current mouse image \end{DoxyCompactList}\item 
+Uint32 \textbf{ xdec}
+\begin{DoxyCompactList}\small\item\em x coordinate of pointer pixel in image \end{DoxyCompactList}\item 
+Uint32 \textbf{ ydec}
+\begin{DoxyCompactList}\small\item\em y coordinate of pointer pixel in image \end{DoxyCompactList}\item 
+SDL\+\_\+bool \textbf{ active}
+\begin{DoxyCompactList}\small\item\em display mouse or not ? \end{DoxyCompactList}\item 
+list$<$ \textbf{ rollover} $\ast$ $>$ \textbf{ rollovers}
+\begin{DoxyCompactList}\small\item\em list of all widgets reactive to mouse position \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+mouse class, for handling mouse graphics and display 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{classmouse_abaf90e3303c92f6688f386d262040cc4}} 
+\index{mouse@{mouse}!mouse@{mouse}}
+\index{mouse@{mouse}!mouse@{mouse}}
+\doxysubsubsection{mouse()}
+{\footnotesize\ttfamily mouse\+::mouse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+constructor 
+
+\mbox{\label{classmouse_ad93d5b140c0869751a4c48af1e611835}} 
+\index{mouse@{mouse}!````~mouse@{$\sim$mouse}}
+\index{````~mouse@{$\sim$mouse}!mouse@{mouse}}
+\doxysubsubsection{$\sim$mouse()}
+{\footnotesize\ttfamily mouse\+::$\sim$mouse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+destructor 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{classmouse_a9c4d460a3866599e3ffc1ad04bdb2815}} 
+\index{mouse@{mouse}!click@{click}}
+\index{click@{click}!mouse@{mouse}}
+\doxysubsubsection{click()}
+{\footnotesize\ttfamily void mouse\+::click (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+click 
+
+\mbox{\label{classmouse_ac88ee4af7809e36ed6c0fe4eb6a6e234}} 
+\index{mouse@{mouse}!disable@{disable}}
+\index{disable@{disable}!mouse@{mouse}}
+\doxysubsubsection{disable()}
+{\footnotesize\ttfamily void mouse\+::disable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+deactivate mouse handling 
+
+\mbox{\label{classmouse_a7b81f945a7c7510bbf789db1dfc82bef}} 
+\index{mouse@{mouse}!display@{display}}
+\index{display@{display}!mouse@{mouse}}
+\doxysubsubsection{display()}
+{\footnotesize\ttfamily void mouse\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+doesn\textquotesingle{}t move but redraws mouse 
+
+this does\textquotesingle{}nt move the mouse but displays it \mbox{\label{classmouse_a5b60f2f98251d26d9e60182ec5ae15f6}} 
+\index{mouse@{mouse}!enable@{enable}}
+\index{enable@{enable}!mouse@{mouse}}
+\doxysubsubsection{enable()}
+{\footnotesize\ttfamily void mouse\+::enable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+activate mouse handling 
+
+\mbox{\label{classmouse_a0254bd090184397cf7769c65bd2cb998}} 
+\index{mouse@{mouse}!get\_x@{get\_x}}
+\index{get\_x@{get\_x}!mouse@{mouse}}
+\doxysubsubsection{get\_x()}
+{\footnotesize\ttfamily Sint16 mouse\+::get\+\_\+x (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get current mouse x coordinate 
+
+\mbox{\label{classmouse_a0fcc74d9ff5626341678fe3785678ec4}} 
+\index{mouse@{mouse}!get\_y@{get\_y}}
+\index{get\_y@{get\_y}!mouse@{mouse}}
+\doxysubsubsection{get\_y()}
+{\footnotesize\ttfamily Sint16 mouse\+::get\+\_\+y (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get current mouse y coordinate 
+
+\mbox{\label{classmouse_a1233ed240dc28ab8a230e1c5465bb114}} 
+\index{mouse@{mouse}!move@{move}}
+\index{move@{move}!mouse@{mouse}}
+\doxysubsubsection{move()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void mouse\+::move (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+handles moving and displaying 
+
+this moves the mouse, draw new mouse, updates coordinates \mbox{\label{classmouse_ab8e83f7ac6d05ae435ea43d65bdb459c}} 
+\index{mouse@{mouse}!move@{move}}
+\index{move@{move}!mouse@{mouse}}
+\doxysubsubsection{move()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void mouse\+::move (\begin{DoxyParamCaption}\item[{Sint32}]{x,  }\item[{Sint32}]{y }\end{DoxyParamCaption})}
+
+
+
+handles moving and displaying 
+
+\mbox{\label{classmouse_a37c109f084683141eb307c0793918cbb}} 
+\index{mouse@{mouse}!recompute\_focuses@{recompute\_focuses}}
+\index{recompute\_focuses@{recompute\_focuses}!mouse@{mouse}}
+\doxysubsubsection{recompute\_focuses()}
+{\footnotesize\ttfamily void mouse\+::recompute\+\_\+focuses (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+update rollovers according to mouse position 
+
+this method iterates on the list of all widgets affected by mouse position (rollovers) when the mouse is above a rollover it calls \doxyref{rollover\+::focus}{p.}{classrollover_a2e6a9a1a9d19bb64f435fe34e2af44de} and \doxyref{rollover\+::unfocus}{p.}{classrollover_ab30f4964ee92db118753ac0cab5d3c34} else \mbox{\label{classmouse_a16ba22b4f6c475ba3f1e5ba9b5314b15}} 
+\index{mouse@{mouse}!register\_rollover@{register\_rollover}}
+\index{register\_rollover@{register\_rollover}!mouse@{mouse}}
+\doxysubsubsection{register\_rollover()}
+{\footnotesize\ttfamily void mouse\+::register\+\_\+rollover (\begin{DoxyParamCaption}\item[{\textbf{ rollover} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+add a new rollover to monitor to our list 
+
+\mbox{\label{classmouse_a9c956c95ad8623b4c80fef5ba825c5e1}} 
+\index{mouse@{mouse}!unregister\_rollover@{unregister\_rollover}}
+\index{unregister\_rollover@{unregister\_rollover}!mouse@{mouse}}
+\doxysubsubsection{unregister\_rollover()}
+{\footnotesize\ttfamily void mouse\+::unregister\+\_\+rollover (\begin{DoxyParamCaption}\item[{\textbf{ rollover} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+remove rollover to monitor from our list 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{classmouse_a6d5c91a1a9b77712db2e1ec67b88d729}} 
+\index{mouse@{mouse}!active@{active}}
+\index{active@{active}!mouse@{mouse}}
+\doxysubsubsection{active}
+{\footnotesize\ttfamily SDL\+\_\+bool mouse\+::active\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+display mouse or not ? 
+
+\mbox{\label{classmouse_a30efed64fe416bf59953016baba7eaf1}} 
+\index{mouse@{mouse}!image@{image}}
+\index{image@{image}!mouse@{mouse}}
+\doxysubsubsection{image}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ mouse\+::image\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+current mouse image 
+
+\mbox{\label{classmouse_a100ab087499cd78e01786266f227f58d}} 
+\index{mouse@{mouse}!mousepos@{mousepos}}
+\index{mousepos@{mousepos}!mouse@{mouse}}
+\doxysubsubsection{mousepos}
+{\footnotesize\ttfamily SDL\+\_\+\+Rect mouse\+::mousepos}
+
+
+
+last mouse coordinates 
+
+\mbox{\label{classmouse_a7639fa989c9d63bc0054ced799615eee}} 
+\index{mouse@{mouse}!rollovers@{rollovers}}
+\index{rollovers@{rollovers}!mouse@{mouse}}
+\doxysubsubsection{rollovers}
+{\footnotesize\ttfamily list$<$\textbf{ rollover}$\ast$$>$ mouse\+::rollovers\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+list of all widgets reactive to mouse position 
+
+\mbox{\label{classmouse_af7ba66eb8b25828fd53aa48fefd78a4c}} 
+\index{mouse@{mouse}!xdec@{xdec}}
+\index{xdec@{xdec}!mouse@{mouse}}
+\doxysubsubsection{xdec}
+{\footnotesize\ttfamily Uint32 mouse\+::xdec\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+x coordinate of pointer pixel in image 
+
+\mbox{\label{classmouse_af8d499fa65199bb6e2d9d7554b248e79}} 
+\index{mouse@{mouse}!ydec@{ydec}}
+\index{ydec@{ydec}!mouse@{mouse}}
+\doxysubsubsection{ydec}
+{\footnotesize\ttfamily Uint32 mouse\+::ydec\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+y coordinate of pointer pixel in image 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ mouse.\+h}\item 
+\textbf{ mouse.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,9 @@
+<map id="widget" name="widget">
+<area shape="rect" id="node1" title=" " alt="" coords="120,5,187,32"/>
+<area shape="rect" id="node2" href="$classblob.html" title=" " alt="" coords="5,80,56,107"/>
+<area shape="rect" id="node3" href="$classimage.html" title=" " alt="" coords="81,80,143,107"/>
+<area shape="rect" id="node4" href="$classlabel.html" title=" " alt="" coords="167,80,222,107"/>
+<area shape="rect" id="node5" href="$classrollover.html" title=" " alt="" coords="247,80,319,107"/>
+<area shape="rect" id="node6" href="$classboard.html" title=" " alt="" coords="211,155,269,181"/>
+<area shape="rect" id="node7" href="$classbutton.html" title=" " alt="" coords="293,155,357,181"/>
+</map>

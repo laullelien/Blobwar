@@ -1,0 +1,16 @@
+This doxygen manual documents the code of the blobwar game and the most important data structures.\doxysection{Understanding the game}\label{index_game}
+Blobwar is a turn by turn strategy game in which each player controls colored blobs \+: small spherical entities ; and tries to win by finishing with more blobs than any of his opponents.
+
+At each turn, a player can select one of his blobs and duplicate him on an adjacent cell of the board (diagonal movements allowed) or move him by making him jump to a cell at a distance of 2.
+
+After the move (or the copy), the blob will convert any adjacent blob to his color. A small counter at the bottom of the screen keeps track of the scores of all players. To increase the interest of the game, some boards cells are \char`\"{}holes\char`\"{} and no blob can enter them. Different boards with different patterns of holes are available to play with.
+
+When a player cannot move, he loses his turn. When no player can move any more, the game finishes. The player with the highest number of blobs is then the winner.\doxysection{Useful data structures to program the AI}\label{index_structures}
+In this section, we quickly explain what files are the most valuable to anyone designing an artificial intelligence. First of all, all modifications should fit in the \doxyref{strategy.\+cc}{p.}{strategy_8cc} file. In fact, the artificial intelligence is called by the method compute\+Best\+Move() of the strategy class. When this method returns, the function \+\_\+save\+Best\+Move should have been called with the coordinates of the move (from old board cell to new board cell).
+
+To compute the best move to play, several structures are needed\+:
+\begin{DoxyEnumerate}
+\item \doxyref{Strategy\+::\+\_\+holes}{p.}{classStrategy_abb1eac2a2aba25c29bb1a0deb0bb89b7} is an array of booleans indicating for each cell whether it is a hole or not.
+\item \doxyref{Strategy\+::\+\_\+current\+\_\+player}{p.}{classStrategy_a60472643a95a0d6d04e80ec594b41bad} is the number of the player who is playing
+\item \doxyref{Strategy\+::\+\_\+blobs}{p.}{classStrategy_a49ccbfdc33b3969582d2700b1c0d6844} is the array containing all blobs on the board. 
+\end{DoxyEnumerate}

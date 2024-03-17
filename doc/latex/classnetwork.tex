@@ -1,0 +1,282 @@
+\doxysection{network Class Reference}
+\label{classnetwork}\index{network@{network}}
+
+
+{\ttfamily \#include $<$network.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ network} ()
+\begin{DoxyCompactList}\small\item\em constructor (init SDLnet) \end{DoxyCompactList}\item 
+\textbf{ $\sim$network} ()
+\begin{DoxyCompactList}\small\item\em destructor (closes connections) \end{DoxyCompactList}\item 
+char $\ast$ \textbf{ connect} ()
+\begin{DoxyCompactList}\small\item\em connect to server (returns map name if succeeded, NULL if failure) \end{DoxyCompactList}\item 
+void \textbf{ change\+\_\+map} (const char $\ast$mapname)
+\begin{DoxyCompactList}\small\item\em inform the server of a map change \end{DoxyCompactList}\item 
+void \textbf{ send} ()
+\begin{DoxyCompactList}\small\item\em send message \end{DoxyCompactList}\item 
+void \textbf{ send} (const char $\ast$msg)
+\begin{DoxyCompactList}\small\item\em send message given in argument \end{DoxyCompactList}\item 
+void \textbf{ handle} ()
+\begin{DoxyCompactList}\small\item\em handle incoming messages \end{DoxyCompactList}\item 
+void \textbf{ parse} (char $\ast$msg)
+\begin{DoxyCompactList}\small\item\em parse messages and execute corresponding actions \end{DoxyCompactList}\item 
+void \textbf{ do\+\_\+move} (Uint8 ox, Uint8 oy, Uint8 nx, Uint8 ny)
+\begin{DoxyCompactList}\small\item\em send move to the server \end{DoxyCompactList}\item 
+Uint32 \textbf{ get\+\_\+player\+\_\+type} ()
+\begin{DoxyCompactList}\small\item\em return the type of player used in network games \end{DoxyCompactList}\item 
+void \textbf{ execute\+\_\+messages} (Uint32 startposition, Uint32 size)
+\begin{DoxyCompactList}\small\item\em go through all received messages and execute them all \end{DoxyCompactList}\item 
+void \textbf{ message} (char $\ast$msg)
+\begin{DoxyCompactList}\small\item\em we received a message, display it \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \textbf{ send\+\_\+buffer} [100]
+\begin{DoxyCompactList}\small\item\em send buffer for outgoing messages \end{DoxyCompactList}\item 
+char \textbf{ receive\+\_\+buffer} [100]
+\begin{DoxyCompactList}\small\item\em receive buffer for incoming messages \end{DoxyCompactList}\item 
+TCPsocket \textbf{ sock}
+\begin{DoxyCompactList}\small\item\em socket used to communication to server \end{DoxyCompactList}\item 
+SDLNet\+\_\+\+Socket\+Set \textbf{ set}
+\begin{DoxyCompactList}\small\item\em set used to detect incoming messages \end{DoxyCompactList}\item 
+bool \textbf{ connected}
+\begin{DoxyCompactList}\small\item\em are we or not already connected to server ? \end{DoxyCompactList}\item 
+char \textbf{ servername} [100]
+\begin{DoxyCompactList}\small\item\em name of server \end{DoxyCompactList}\item 
+Sint16 \textbf{ serverport}
+\begin{DoxyCompactList}\small\item\em port of server \end{DoxyCompactList}\item 
+char \textbf{ teamname} [100]
+\begin{DoxyCompactList}\small\item\em name of local team \end{DoxyCompactList}\item 
+Uint32 \textbf{ playertype}
+\begin{DoxyCompactList}\small\item\em is local player human (0) or AI (1) ? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+network class helpfull class to send/parse messages, initiate connection, ... 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{classnetwork_a34d93274889f9058f789b2aed201d3d5}} 
+\index{network@{network}!network@{network}}
+\index{network@{network}!network@{network}}
+\doxysubsubsection{network()}
+{\footnotesize\ttfamily network\+::network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+constructor (init SDLnet) 
+
+\mbox{\label{classnetwork_a37b843338509d5a411b3efe2b702da15}} 
+\index{network@{network}!````~network@{$\sim$network}}
+\index{````~network@{$\sim$network}!network@{network}}
+\doxysubsubsection{$\sim$network()}
+{\footnotesize\ttfamily network\+::$\sim$network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+destructor (closes connections) 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{classnetwork_aabf77f9f4d1d167a379ac7adbcdf1d2b}} 
+\index{network@{network}!change\_map@{change\_map}}
+\index{change\_map@{change\_map}!network@{network}}
+\doxysubsubsection{change\_map()}
+{\footnotesize\ttfamily void network\+::change\+\_\+map (\begin{DoxyParamCaption}\item[{const char $\ast$}]{mapname }\end{DoxyParamCaption})}
+
+
+
+inform the server of a map change 
+
+\mbox{\label{classnetwork_aed604f9303c0e7e156aa803c00aa053f}} 
+\index{network@{network}!connect@{connect}}
+\index{connect@{connect}!network@{network}}
+\doxysubsubsection{connect()}
+{\footnotesize\ttfamily char $\ast$ network\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+connect to server (returns map name if succeeded, NULL if failure) 
+
+\mbox{\label{classnetwork_a699d3116cc62e7a653a33d05601e1cbb}} 
+\index{network@{network}!do\_move@{do\_move}}
+\index{do\_move@{do\_move}!network@{network}}
+\doxysubsubsection{do\_move()}
+{\footnotesize\ttfamily void network\+::do\+\_\+move (\begin{DoxyParamCaption}\item[{Uint8}]{ox,  }\item[{Uint8}]{oy,  }\item[{Uint8}]{nx,  }\item[{Uint8}]{ny }\end{DoxyParamCaption})}
+
+
+
+send move to the server 
+
+\mbox{\label{classnetwork_a7d0c3945d3cb7b59f1c00ea5891550e7}} 
+\index{network@{network}!execute\_messages@{execute\_messages}}
+\index{execute\_messages@{execute\_messages}!network@{network}}
+\doxysubsubsection{execute\_messages()}
+{\footnotesize\ttfamily void network\+::execute\+\_\+messages (\begin{DoxyParamCaption}\item[{Uint32}]{startposition,  }\item[{Uint32}]{size }\end{DoxyParamCaption})}
+
+
+
+go through all received messages and execute them all 
+
+\mbox{\label{classnetwork_ac156334b70e489493657ccf93e28ae20}} 
+\index{network@{network}!get\_player\_type@{get\_player\_type}}
+\index{get\_player\_type@{get\_player\_type}!network@{network}}
+\doxysubsubsection{get\_player\_type()}
+{\footnotesize\ttfamily Uint32 network\+::get\+\_\+player\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return the type of player used in network games 
+
+\mbox{\label{classnetwork_a77ff83e4c3f1fa5f4b70f59d0a015ef0}} 
+\index{network@{network}!handle@{handle}}
+\index{handle@{handle}!network@{network}}
+\doxysubsubsection{handle()}
+{\footnotesize\ttfamily void network\+::handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+handle incoming messages 
+
+\mbox{\label{classnetwork_a409276588ce41d2dbf01eebd0c659b8d}} 
+\index{network@{network}!message@{message}}
+\index{message@{message}!network@{network}}
+\doxysubsubsection{message()}
+{\footnotesize\ttfamily void network\+::message (\begin{DoxyParamCaption}\item[{char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+we received a message, display it 
+
+\mbox{\label{classnetwork_a25e6a19acf03eb18c3383c7945292fb3}} 
+\index{network@{network}!parse@{parse}}
+\index{parse@{parse}!network@{network}}
+\doxysubsubsection{parse()}
+{\footnotesize\ttfamily void network\+::parse (\begin{DoxyParamCaption}\item[{char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+parse messages and execute corresponding actions 
+
+\mbox{\label{classnetwork_ad5a8d5577bd0983e70efea5ce5b21ab6}} 
+\index{network@{network}!send@{send}}
+\index{send@{send}!network@{network}}
+\doxysubsubsection{send()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void network\+::send (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+send message 
+
+\mbox{\label{classnetwork_a230e95d83623fc223f818e538cf12e17}} 
+\index{network@{network}!send@{send}}
+\index{send@{send}!network@{network}}
+\doxysubsubsection{send()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void network\+::send (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+send message given in argument 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{classnetwork_ac9e5280bf9e6e0e18583adf8e7b2d2f4}} 
+\index{network@{network}!connected@{connected}}
+\index{connected@{connected}!network@{network}}
+\doxysubsubsection{connected}
+{\footnotesize\ttfamily bool network\+::connected\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+are we or not already connected to server ? 
+
+\mbox{\label{classnetwork_afd9474586b9326623f701c7e60e64e0f}} 
+\index{network@{network}!playertype@{playertype}}
+\index{playertype@{playertype}!network@{network}}
+\doxysubsubsection{playertype}
+{\footnotesize\ttfamily Uint32 network\+::playertype\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+is local player human (0) or AI (1) ? 
+
+\mbox{\label{classnetwork_ae08f61d9b2fe3a18d98dee1ae0e35fec}} 
+\index{network@{network}!receive\_buffer@{receive\_buffer}}
+\index{receive\_buffer@{receive\_buffer}!network@{network}}
+\doxysubsubsection{receive\_buffer}
+{\footnotesize\ttfamily char network\+::receive\+\_\+buffer[100]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+receive buffer for incoming messages 
+
+\mbox{\label{classnetwork_acfeaa841d558234af7b8aefe92e60de1}} 
+\index{network@{network}!send\_buffer@{send\_buffer}}
+\index{send\_buffer@{send\_buffer}!network@{network}}
+\doxysubsubsection{send\_buffer}
+{\footnotesize\ttfamily char network\+::send\+\_\+buffer[100]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+send buffer for outgoing messages 
+
+\mbox{\label{classnetwork_aa58bd130afa8863729904e106f3c9e26}} 
+\index{network@{network}!servername@{servername}}
+\index{servername@{servername}!network@{network}}
+\doxysubsubsection{servername}
+{\footnotesize\ttfamily char network\+::servername[100]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+name of server 
+
+\mbox{\label{classnetwork_a63fab9a27945033412f66139b03b45d0}} 
+\index{network@{network}!serverport@{serverport}}
+\index{serverport@{serverport}!network@{network}}
+\doxysubsubsection{serverport}
+{\footnotesize\ttfamily Sint16 network\+::serverport\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+port of server 
+
+\mbox{\label{classnetwork_ae86228dd3ac9caa21e98826407fc2dd1}} 
+\index{network@{network}!set@{set}}
+\index{set@{set}!network@{network}}
+\doxysubsubsection{set}
+{\footnotesize\ttfamily SDLNet\+\_\+\+Socket\+Set network\+::set\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+set used to detect incoming messages 
+
+\mbox{\label{classnetwork_abf8b96c0ef5fb49b1e015ede38f5326c}} 
+\index{network@{network}!sock@{sock}}
+\index{sock@{sock}!network@{network}}
+\doxysubsubsection{sock}
+{\footnotesize\ttfamily TCPsocket network\+::sock\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+socket used to communication to server 
+
+\mbox{\label{classnetwork_a921b5ff54f68e218aab5bec84f067ef4}} 
+\index{network@{network}!teamname@{teamname}}
+\index{teamname@{teamname}!network@{network}}
+\doxysubsubsection{teamname}
+{\footnotesize\ttfamily char network\+::teamname[100]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+name of local team 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ network.\+h}\item 
+\textbf{ network.\+cc}\end{DoxyCompactItemize}

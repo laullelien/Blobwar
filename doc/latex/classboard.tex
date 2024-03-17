@@ -1,0 +1,613 @@
+\doxysection{board Class Reference}
+\label{classboard}\index{board@{board}}
+
+
+{\ttfamily \#include $<$board.\+h$>$}
+
+
+
+Inheritance diagram for board\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=98pt]{classboard__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for board\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{classboard__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ board} ()
+\begin{DoxyCompactList}\small\item\em build a board (reading the first map in map dir) \end{DoxyCompactList}\item 
+\textbf{ $\sim$board} ()
+\begin{DoxyCompactList}\small\item\em free memory \end{DoxyCompactList}\item 
+void \textbf{ load\+\_\+map} (string filename)
+\begin{DoxyCompactList}\small\item\em load a new board from text file \end{DoxyCompactList}\item 
+void \textbf{ display} ()
+\begin{DoxyCompactList}\small\item\em display on screen \end{DoxyCompactList}\item 
+void \textbf{ focus} ()
+\begin{DoxyCompactList}\small\item\em we got mouse focus \end{DoxyCompactList}\item 
+void \textbf{ unfocus} ()
+\begin{DoxyCompactList}\small\item\em we lost mouse focus \end{DoxyCompactList}\item 
+void \textbf{ next\+\_\+board} ()
+\begin{DoxyCompactList}\small\item\em change board to next one in the list \end{DoxyCompactList}\item 
+void \textbf{ previous\+\_\+board} ()
+\begin{DoxyCompactList}\small\item\em change board to previous one in the list \end{DoxyCompactList}\item 
+const char $\ast$ \textbf{ get\+\_\+next\+\_\+board} ()
+\begin{DoxyCompactList}\small\item\em returns name of next board \end{DoxyCompactList}\item 
+const char $\ast$ \textbf{ get\+\_\+previous\+\_\+board} ()
+\begin{DoxyCompactList}\small\item\em returns name of previous board \end{DoxyCompactList}\item 
+void \textbf{ switch\+\_\+map} (string filename)
+\begin{DoxyCompactList}\small\item\em change the map \end{DoxyCompactList}\item 
+void \textbf{ click} ()
+\begin{DoxyCompactList}\small\item\em to execute when the button is clicked \end{DoxyCompactList}\item 
+void \textbf{ create\+\_\+blob} (Uint8 x, Uint8 y, Uint16 \textbf{ player})
+\begin{DoxyCompactList}\small\item\em add a new blob \end{DoxyCompactList}\item 
+void \textbf{ move\+\_\+blob} (Uint8 ox, Uint8 oy, Uint8 nx, Uint8 ny)
+\begin{DoxyCompactList}\small\item\em move a blob \end{DoxyCompactList}\item 
+void \textbf{ activate} ()
+\begin{DoxyCompactList}\small\item\em enable the board to react to mouse events \end{DoxyCompactList}\item 
+bool \textbf{ is\+\_\+active} ()
+\begin{DoxyCompactList}\small\item\em are we activated ? \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+focused\+\_\+tile} (Uint8 x, Uint8 y)
+\begin{DoxyCompactList}\small\item\em set the tile currently focused \end{DoxyCompactList}\item 
+void \textbf{ change\+\_\+blob\+\_\+owner} (Uint8 x, Uint8 y, Uint16 \textbf{ player})
+\begin{DoxyCompactList}\small\item\em change the player owning a blob (and color) \end{DoxyCompactList}\item 
+void \textbf{ select\+\_\+tile} (Uint8 x, Uint8 y)
+\begin{DoxyCompactList}\small\item\em we selected a tile, highlight neighbours \end{DoxyCompactList}\item 
+void \textbf{ unselect\+\_\+tile} (Uint8 x, Uint8 y)
+\begin{DoxyCompactList}\small\item\em no tile is selected anymore (remove highlight) \end{DoxyCompactList}\item 
+void \textbf{ reset} ()
+\begin{DoxyCompactList}\small\item\em remove blobs and prepare for next game \end{DoxyCompactList}\item 
+void \textbf{ init} (unsigned int \textbf{ number\+\_\+of\+\_\+players})
+\begin{DoxyCompactList}\small\item\em put the initial blobs in place \end{DoxyCompactList}\item 
+void \textbf{ copy\+\_\+board} (\textbf{ bidiarray}$<$ bool $>$ \&destination)
+\begin{DoxyCompactList}\small\item\em copy map holes into given array \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ underleft}
+\begin{DoxyCompactList}\small\item\em image under the board (left) \end{DoxyCompactList}\item 
+SDL\+\_\+\+Rect \textbf{ ulrect}
+\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ underright}
+\begin{DoxyCompactList}\small\item\em image under the board (right) \end{DoxyCompactList}\item 
+SDL\+\_\+\+Rect \textbf{ urrect}
+\item 
+Uint16 \textbf{ map\+\_\+number}
+\begin{DoxyCompactList}\small\item\em current map displayed \end{DoxyCompactList}\item 
+vector$<$ string $>$ \textbf{ maps}
+\begin{DoxyCompactList}\small\item\em all the maps we have \end{DoxyCompactList}\item 
+\textbf{ bidiarray}$<$ bool $>$ \textbf{ holes}
+\begin{DoxyCompactList}\small\item\em where are the holes in the board \end{DoxyCompactList}\item 
+\textbf{ tile} $\ast$ \textbf{ tiles} [64]
+\begin{DoxyCompactList}\small\item\em all tiles (NULL is none) \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ tilegrass}
+\begin{DoxyCompactList}\small\item\em tile for land (not focused) \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ tilegrasshigh}
+\begin{DoxyCompactList}\small\item\em tile for land (focused) \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ h1}
+\begin{DoxyCompactList}\small\item\em tile for land at distance 1 from selected tile \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ h2}
+\begin{DoxyCompactList}\small\item\em tile for land at distance 2 from selected tile \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ h0}
+\begin{DoxyCompactList}\small\item\em tile for selected tile \end{DoxyCompactList}\item 
+SDL\+\_\+\+Surface $\ast$ \textbf{ tilehole}
+\begin{DoxyCompactList}\small\item\em tile for hole \end{DoxyCompactList}\item 
+\textbf{ blob} $\ast$ \textbf{ blobs} [8][8]
+\begin{DoxyCompactList}\small\item\em array of blobs in game \end{DoxyCompactList}\item 
+vector$<$ SDL\+\_\+\+Surface $\ast$ $>$ \textbf{ blobs\+\_\+surfaces}
+\begin{DoxyCompactList}\small\item\em vector of surfaces needed for the blobs \end{DoxyCompactList}\item 
+bool \textbf{ active}
+\begin{DoxyCompactList}\small\item\em do we react to external events ? \end{DoxyCompactList}\item 
+Uint8 \textbf{ fx}
+\begin{DoxyCompactList}\small\item\em x coordinate of tile currently under mouse \end{DoxyCompactList}\item 
+Uint8 \textbf{ fy}
+\begin{DoxyCompactList}\small\item\em y coordinate of tile currently under mouse \end{DoxyCompactList}\item 
+\textbf{ tile} $\ast$ \textbf{ selected\+\_\+tile}
+\begin{DoxyCompactList}\small\item\em tile with blob selected for move \end{DoxyCompactList}\item 
+Uint32 \textbf{ scores} [4]
+\begin{DoxyCompactList}\small\item\em current number of blobs (scores) for each player \end{DoxyCompactList}\item 
+string \textbf{ players\+\_\+names} [4]
+\begin{DoxyCompactList}\small\item\em names of different players (colors) \end{DoxyCompactList}\item 
+unsigned int \textbf{ number\+\_\+of\+\_\+players}
+\begin{DoxyCompactList}\small\item\em number of players in the game \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{classboard_a2a97f34e7c9ed8ace6a2508bb2c6e2a2}} 
+\index{board@{board}!board@{board}}
+\index{board@{board}!board@{board}}
+\doxysubsubsection{board()}
+{\footnotesize\ttfamily board\+::board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+build a board (reading the first map in map dir) 
+
+\mbox{\label{classboard_a978427d3593354f5d735a766585a2ad2}} 
+\index{board@{board}!````~board@{$\sim$board}}
+\index{````~board@{$\sim$board}!board@{board}}
+\doxysubsubsection{$\sim$board()}
+{\footnotesize\ttfamily board\+::$\sim$board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+free memory 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{classboard_aac51519f9c27d7f9bc50a24420047068}} 
+\index{board@{board}!activate@{activate}}
+\index{activate@{activate}!board@{board}}
+\doxysubsubsection{activate()}
+{\footnotesize\ttfamily void board\+::activate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+enable the board to react to mouse events 
+
+\mbox{\label{classboard_a6149e0bd2927033b123a16ce367d8e51}} 
+\index{board@{board}!change\_blob\_owner@{change\_blob\_owner}}
+\index{change\_blob\_owner@{change\_blob\_owner}!board@{board}}
+\doxysubsubsection{change\_blob\_owner()}
+{\footnotesize\ttfamily void board\+::change\+\_\+blob\+\_\+owner (\begin{DoxyParamCaption}\item[{Uint8}]{x,  }\item[{Uint8}]{y,  }\item[{Uint16}]{player }\end{DoxyParamCaption})}
+
+
+
+change the player owning a blob (and color) 
+
+\mbox{\label{classboard_a27222138abb92a6a09773a7c21455a29}} 
+\index{board@{board}!click@{click}}
+\index{click@{click}!board@{board}}
+\doxysubsubsection{click()}
+{\footnotesize\ttfamily void board\+::click (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+to execute when the button is clicked 
+
+
+
+Reimplemented from \textbf{ rollover} \doxyref{}{p.}{classrollover_ac77644d788392f04330a1e614b58af0d}.
+
+\mbox{\label{classboard_a6543506e6f8830d0c5ef7eabdeebabe8}} 
+\index{board@{board}!copy\_board@{copy\_board}}
+\index{copy\_board@{copy\_board}!board@{board}}
+\doxysubsubsection{copy\_board()}
+{\footnotesize\ttfamily void board\+::copy\+\_\+board (\begin{DoxyParamCaption}\item[{\textbf{ bidiarray}$<$ bool $>$ \&}]{destination }\end{DoxyParamCaption})}
+
+
+
+copy map holes into given array 
+
+\mbox{\label{classboard_a80e1d6f166b276c26d4919972cef14a7}} 
+\index{board@{board}!create\_blob@{create\_blob}}
+\index{create\_blob@{create\_blob}!board@{board}}
+\doxysubsubsection{create\_blob()}
+{\footnotesize\ttfamily void board\+::create\+\_\+blob (\begin{DoxyParamCaption}\item[{Uint8}]{x,  }\item[{Uint8}]{y,  }\item[{Uint16}]{player }\end{DoxyParamCaption})}
+
+
+
+add a new blob 
+
+\mbox{\label{classboard_a204adfa6b9b10c4cf14c9eebffa0f055}} 
+\index{board@{board}!display@{display}}
+\index{display@{display}!board@{board}}
+\doxysubsubsection{display()}
+{\footnotesize\ttfamily void board\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+display on screen 
+
+
+
+Reimplemented from \textbf{ widget} \doxyref{}{p.}{classwidget_a5af8dad360f557857d78cf4fa6091357}.
+
+\mbox{\label{classboard_a34f23e7bf4c00b16ec86a8290ffc0e01}} 
+\index{board@{board}!focus@{focus}}
+\index{focus@{focus}!board@{board}}
+\doxysubsubsection{focus()}
+{\footnotesize\ttfamily void board\+::focus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+we got mouse focus 
+
+
+
+Reimplemented from \textbf{ rollover} \doxyref{}{p.}{classrollover_a2e6a9a1a9d19bb64f435fe34e2af44de}.
+
+\mbox{\label{classboard_a48f3a528671994d8a60b605147353215}} 
+\index{board@{board}!get\_next\_board@{get\_next\_board}}
+\index{get\_next\_board@{get\_next\_board}!board@{board}}
+\doxysubsubsection{get\_next\_board()}
+{\footnotesize\ttfamily const char $\ast$ board\+::get\+\_\+next\+\_\+board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+returns name of next board 
+
+\mbox{\label{classboard_aa821563989d8fa9999e31eb7720d60cf}} 
+\index{board@{board}!get\_previous\_board@{get\_previous\_board}}
+\index{get\_previous\_board@{get\_previous\_board}!board@{board}}
+\doxysubsubsection{get\_previous\_board()}
+{\footnotesize\ttfamily const char $\ast$ board\+::get\+\_\+previous\+\_\+board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+returns name of previous board 
+
+\mbox{\label{classboard_a6c6aba43d9fcbc3fea56331002ae0f1a}} 
+\index{board@{board}!init@{init}}
+\index{init@{init}!board@{board}}
+\doxysubsubsection{init()}
+{\footnotesize\ttfamily void board\+::init (\begin{DoxyParamCaption}\item[{unsigned int}]{num }\end{DoxyParamCaption})}
+
+
+
+put the initial blobs in place 
+
+puts the initial blobs on the board at the same time updates the private \char`\"{}number\+\_\+of\+\_\+players\char`\"{} field \mbox{\label{classboard_a5c54187eac4a05ac7a56e89476e7eb43}} 
+\index{board@{board}!is\_active@{is\_active}}
+\index{is\_active@{is\_active}!board@{board}}
+\doxysubsubsection{is\_active()}
+{\footnotesize\ttfamily bool board\+::is\+\_\+active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+are we activated ? 
+
+\mbox{\label{classboard_ae2af35555634cfbf59ab60106341d7eb}} 
+\index{board@{board}!load\_map@{load\_map}}
+\index{load\_map@{load\_map}!board@{board}}
+\doxysubsubsection{load\_map()}
+{\footnotesize\ttfamily void board\+::load\+\_\+map (\begin{DoxyParamCaption}\item[{string}]{filename }\end{DoxyParamCaption})}
+
+
+
+load a new board from text file 
+
+\mbox{\label{classboard_a9c276dd0e4116b3219f68c19cf372320}} 
+\index{board@{board}!move\_blob@{move\_blob}}
+\index{move\_blob@{move\_blob}!board@{board}}
+\doxysubsubsection{move\_blob()}
+{\footnotesize\ttfamily void board\+::move\+\_\+blob (\begin{DoxyParamCaption}\item[{Uint8}]{ox,  }\item[{Uint8}]{oy,  }\item[{Uint8}]{nx,  }\item[{Uint8}]{ny }\end{DoxyParamCaption})}
+
+
+
+move a blob 
+
+\mbox{\label{classboard_a5735a95d3bb5ed37867caf24a93d45bb}} 
+\index{board@{board}!next\_board@{next\_board}}
+\index{next\_board@{next\_board}!board@{board}}
+\doxysubsubsection{next\_board()}
+{\footnotesize\ttfamily void board\+::next\+\_\+board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+change board to next one in the list 
+
+\mbox{\label{classboard_a197ea99b09166d99cd49bbf09b3725ad}} 
+\index{board@{board}!previous\_board@{previous\_board}}
+\index{previous\_board@{previous\_board}!board@{board}}
+\doxysubsubsection{previous\_board()}
+{\footnotesize\ttfamily void board\+::previous\+\_\+board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+change board to previous one in the list 
+
+\mbox{\label{classboard_a8795e06bb309e1a8255229673e4f39c1}} 
+\index{board@{board}!reset@{reset}}
+\index{reset@{reset}!board@{board}}
+\doxysubsubsection{reset()}
+{\footnotesize\ttfamily void board\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+remove blobs and prepare for next game 
+
+\mbox{\label{classboard_a80896d69c7e1148c330500b62c01c815}} 
+\index{board@{board}!select\_tile@{select\_tile}}
+\index{select\_tile@{select\_tile}!board@{board}}
+\doxysubsubsection{select\_tile()}
+{\footnotesize\ttfamily void board\+::select\+\_\+tile (\begin{DoxyParamCaption}\item[{Uint8}]{x,  }\item[{Uint8}]{y }\end{DoxyParamCaption})}
+
+
+
+we selected a tile, highlight neighbours 
+
+\mbox{\label{classboard_a535dbd6ecd3e94cb39dc919d915f2b3a}} 
+\index{board@{board}!set\_focused\_tile@{set\_focused\_tile}}
+\index{set\_focused\_tile@{set\_focused\_tile}!board@{board}}
+\doxysubsubsection{set\_focused\_tile()}
+{\footnotesize\ttfamily void board\+::set\+\_\+focused\+\_\+tile (\begin{DoxyParamCaption}\item[{Uint8}]{x,  }\item[{Uint8}]{y }\end{DoxyParamCaption})}
+
+
+
+set the tile currently focused 
+
+\mbox{\label{classboard_a92419d60a98876600b702a4c198c57ae}} 
+\index{board@{board}!switch\_map@{switch\_map}}
+\index{switch\_map@{switch\_map}!board@{board}}
+\doxysubsubsection{switch\_map()}
+{\footnotesize\ttfamily void board\+::switch\+\_\+map (\begin{DoxyParamCaption}\item[{string}]{filename }\end{DoxyParamCaption})}
+
+
+
+change the map 
+
+change the board to a new map this method is used in the map selection screen 
+\begin{DoxyParams}{Parameters}
+{\em filename} & \+: name of new map \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classboard_a576255f95d17933c480bf18d4f40ce58}} 
+\index{board@{board}!unfocus@{unfocus}}
+\index{unfocus@{unfocus}!board@{board}}
+\doxysubsubsection{unfocus()}
+{\footnotesize\ttfamily void board\+::unfocus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+we lost mouse focus 
+
+
+
+Reimplemented from \textbf{ rollover} \doxyref{}{p.}{classrollover_ab30f4964ee92db118753ac0cab5d3c34}.
+
+\mbox{\label{classboard_a6568d4554ad32f1259c7ffbbdc557306}} 
+\index{board@{board}!unselect\_tile@{unselect\_tile}}
+\index{unselect\_tile@{unselect\_tile}!board@{board}}
+\doxysubsubsection{unselect\_tile()}
+{\footnotesize\ttfamily void board\+::unselect\+\_\+tile (\begin{DoxyParamCaption}\item[{Uint8}]{x,  }\item[{Uint8}]{y }\end{DoxyParamCaption})}
+
+
+
+no tile is selected anymore (remove highlight) 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{classboard_a341c5adecbb744456b3c4f683e6cc129}} 
+\index{board@{board}!active@{active}}
+\index{active@{active}!board@{board}}
+\doxysubsubsection{active}
+{\footnotesize\ttfamily bool board\+::active\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+do we react to external events ? 
+
+\mbox{\label{classboard_a7b889547a1e3fcf3dbb6d15ff656285b}} 
+\index{board@{board}!blobs@{blobs}}
+\index{blobs@{blobs}!board@{board}}
+\doxysubsubsection{blobs}
+{\footnotesize\ttfamily \textbf{ blob}$\ast$ board\+::blobs[8][8]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+array of blobs in game 
+
+\mbox{\label{classboard_a61372bbd2a21a26e835e98255a057168}} 
+\index{board@{board}!blobs\_surfaces@{blobs\_surfaces}}
+\index{blobs\_surfaces@{blobs\_surfaces}!board@{board}}
+\doxysubsubsection{blobs\_surfaces}
+{\footnotesize\ttfamily vector$<$SDL\+\_\+\+Surface$\ast$$>$ board\+::blobs\+\_\+surfaces\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+vector of surfaces needed for the blobs 
+
+\mbox{\label{classboard_a31eec86729ad84a04559ccaabf7b41f0}} 
+\index{board@{board}!fx@{fx}}
+\index{fx@{fx}!board@{board}}
+\doxysubsubsection{fx}
+{\footnotesize\ttfamily Uint8 board\+::fx\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+x coordinate of tile currently under mouse 
+
+\mbox{\label{classboard_a816034acad94510d95486b72321c341d}} 
+\index{board@{board}!fy@{fy}}
+\index{fy@{fy}!board@{board}}
+\doxysubsubsection{fy}
+{\footnotesize\ttfamily Uint8 board\+::fy\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+y coordinate of tile currently under mouse 
+
+\mbox{\label{classboard_a995f35f1c80f234cba7082cba9961fac}} 
+\index{board@{board}!h0@{h0}}
+\index{h0@{h0}!board@{board}}
+\doxysubsubsection{h0}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ board\+::h0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile for selected tile 
+
+\mbox{\label{classboard_a9dcdb754602fdab0c28a5f6913c46f48}} 
+\index{board@{board}!h1@{h1}}
+\index{h1@{h1}!board@{board}}
+\doxysubsubsection{h1}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ board\+::h1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile for land at distance 1 from selected tile 
+
+\mbox{\label{classboard_a21086bdc1c45d010aaf9c4f1aee77bef}} 
+\index{board@{board}!h2@{h2}}
+\index{h2@{h2}!board@{board}}
+\doxysubsubsection{h2}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ board\+::h2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile for land at distance 2 from selected tile 
+
+\mbox{\label{classboard_a5f2618805b976495ded0575cd22ea233}} 
+\index{board@{board}!holes@{holes}}
+\index{holes@{holes}!board@{board}}
+\doxysubsubsection{holes}
+{\footnotesize\ttfamily \textbf{ bidiarray}$<$bool$>$ board\+::holes\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+where are the holes in the board 
+
+\mbox{\label{classboard_a05ead424ec55e5d6b0cf5ad619138e65}} 
+\index{board@{board}!map\_number@{map\_number}}
+\index{map\_number@{map\_number}!board@{board}}
+\doxysubsubsection{map\_number}
+{\footnotesize\ttfamily Uint16 board\+::map\+\_\+number\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+current map displayed 
+
+\mbox{\label{classboard_a682dda3e23941cd4b04a44f46d3c2d66}} 
+\index{board@{board}!maps@{maps}}
+\index{maps@{maps}!board@{board}}
+\doxysubsubsection{maps}
+{\footnotesize\ttfamily vector$<$string$>$ board\+::maps\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+all the maps we have 
+
+\mbox{\label{classboard_ab9521e695c8b84dfc825b5c7f6182155}} 
+\index{board@{board}!number\_of\_players@{number\_of\_players}}
+\index{number\_of\_players@{number\_of\_players}!board@{board}}
+\doxysubsubsection{number\_of\_players}
+{\footnotesize\ttfamily unsigned int board\+::number\+\_\+of\+\_\+players\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+number of players in the game 
+
+\mbox{\label{classboard_a5ba3b0e82c3aee081a3d85e97b8df466}} 
+\index{board@{board}!players\_names@{players\_names}}
+\index{players\_names@{players\_names}!board@{board}}
+\doxysubsubsection{players\_names}
+{\footnotesize\ttfamily string board\+::players\+\_\+names[4]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+names of different players (colors) 
+
+\mbox{\label{classboard_a254550d0c015fec459e56a6d0f534d5f}} 
+\index{board@{board}!scores@{scores}}
+\index{scores@{scores}!board@{board}}
+\doxysubsubsection{scores}
+{\footnotesize\ttfamily Uint32 board\+::scores[4]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+current number of blobs (scores) for each player 
+
+\mbox{\label{classboard_aa1502b680e29bed2b91766223a9aa169}} 
+\index{board@{board}!selected\_tile@{selected\_tile}}
+\index{selected\_tile@{selected\_tile}!board@{board}}
+\doxysubsubsection{selected\_tile}
+{\footnotesize\ttfamily \textbf{ tile}$\ast$ board\+::selected\+\_\+tile\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile with blob selected for move 
+
+\mbox{\label{classboard_adf513874b9bda7a8f9bd366b5793b24c}} 
+\index{board@{board}!tilegrass@{tilegrass}}
+\index{tilegrass@{tilegrass}!board@{board}}
+\doxysubsubsection{tilegrass}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ board\+::tilegrass\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile for land (not focused) 
+
+\mbox{\label{classboard_a85d8fd8a4c3022fc5c1b4dc55d573fdd}} 
+\index{board@{board}!tilegrasshigh@{tilegrasshigh}}
+\index{tilegrasshigh@{tilegrasshigh}!board@{board}}
+\doxysubsubsection{tilegrasshigh}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ board\+::tilegrasshigh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile for land (focused) 
+
+\mbox{\label{classboard_a212d2b91880e04a0e1eaba0bd61e4faa}} 
+\index{board@{board}!tilehole@{tilehole}}
+\index{tilehole@{tilehole}!board@{board}}
+\doxysubsubsection{tilehole}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ board\+::tilehole\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+tile for hole 
+
+\mbox{\label{classboard_a70b5ea005e0c5bee9e62de8228571cea}} 
+\index{board@{board}!tiles@{tiles}}
+\index{tiles@{tiles}!board@{board}}
+\doxysubsubsection{tiles}
+{\footnotesize\ttfamily \textbf{ tile}$\ast$ board\+::tiles[64]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+all tiles (NULL is none) 
+
+\mbox{\label{classboard_aa401666d40d261f2038908151862d971}} 
+\index{board@{board}!ulrect@{ulrect}}
+\index{ulrect@{ulrect}!board@{board}}
+\doxysubsubsection{ulrect}
+{\footnotesize\ttfamily SDL\+\_\+\+Rect board\+::ulrect\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{classboard_ab50b49319e0d74432dc61a70c902ada0}} 
+\index{board@{board}!underleft@{underleft}}
+\index{underleft@{underleft}!board@{board}}
+\doxysubsubsection{underleft}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ board\+::underleft\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+image under the board (left) 
+
+\mbox{\label{classboard_a3fd87622ff4d4d91051921ef5630b468}} 
+\index{board@{board}!underright@{underright}}
+\index{underright@{underright}!board@{board}}
+\doxysubsubsection{underright}
+{\footnotesize\ttfamily SDL\+\_\+\+Surface$\ast$ board\+::underright\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+image under the board (right) 
+
+\mbox{\label{classboard_a5b83c1d45207fa6f34b33f16d9668125}} 
+\index{board@{board}!urrect@{urrect}}
+\index{urrect@{urrect}!board@{board}}
+\doxysubsubsection{urrect}
+{\footnotesize\ttfamily SDL\+\_\+\+Rect board\+::urrect\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ board.\+h}\item 
+\textbf{ board.\+cc}\end{DoxyCompactItemize}

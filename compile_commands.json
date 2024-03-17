@@ -1,0 +1,308 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "strategy.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/strategy.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "blobwar.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/blobwar.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "main.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/main.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "font.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/font.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "mouse.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/mouse.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "image.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/image.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "widget.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/widget.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "rollover.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/rollover.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "button.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/button.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "label.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/label.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "board.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/board.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "rules.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/rules.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "blob.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/blob.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "network.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/network.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "bidiarray.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/bidiarray.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "shmem.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/shmem.cc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-O3",
+      "-g",
+      "-I/usr/include/SDL",
+      "-D_GNU_SOURCE=1",
+      "-D_REENTRANT",
+      "-Wno-strict-aliasing",
+      "-DDEBUG",
+      "launchStrategy.cc"
+    ],
+    "directory": "/home/laulelien/2A/Algo-avancee/blobwar-1.2",
+    "file": "/home/laulelien/2A/Algo-avancee/blobwar-1.2/launchStrategy.cc"
+  }
+]

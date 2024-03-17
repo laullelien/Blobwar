@@ -1,0 +1,58 @@
+\doxysection{shmem.\+h File Reference}
+\label{shmem_8h}\index{shmem.h@{shmem.h}}
+{\ttfamily \#include \char`\"{}common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}move.\+h\char`\"{}}\newline
+Include dependency graph for shmem.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shmem_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{shmem_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ shmem\+\_\+init} (bool init\+\_\+move=false)
+\item 
+\textbf{ movement} \textbf{ shmem\+\_\+get} ()
+\begin{DoxyCompactList}\small\item\em return the last save move \end{DoxyCompactList}\item 
+void \textbf{ shmem\+\_\+set} (\textbf{ movement} \&m)
+\begin{DoxyCompactList}\small\item\em save a new move \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{shmem_8h_a4f6a33531362bb93af9b0ca51ecac0e9}} 
+\index{shmem.h@{shmem.h}!shmem\_get@{shmem\_get}}
+\index{shmem\_get@{shmem\_get}!shmem.h@{shmem.h}}
+\doxysubsubsection{shmem\_get()}
+{\footnotesize\ttfamily \textbf{ movement} shmem\+\_\+get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return the last save move 
+
+\mbox{\label{shmem_8h_a5d74202da7a31e2d88418d097b1130de}} 
+\index{shmem.h@{shmem.h}!shmem\_init@{shmem\_init}}
+\index{shmem\_init@{shmem\_init}!shmem.h@{shmem.h}}
+\doxysubsubsection{shmem\_init()}
+{\footnotesize\ttfamily void shmem\+\_\+init (\begin{DoxyParamCaption}\item[{bool}]{init\+\_\+move = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Share memory between 2 process (blobwar and launch\+Strategy). should be called first if init\+\_\+move is true, the move will be set to 0,0,0,0 \mbox{\label{shmem_8h_aca140ff409c411f8b03014ac4a185497}} 
+\index{shmem.h@{shmem.h}!shmem\_set@{shmem\_set}}
+\index{shmem\_set@{shmem\_set}!shmem.h@{shmem.h}}
+\doxysubsubsection{shmem\_set()}
+{\footnotesize\ttfamily void shmem\+\_\+set (\begin{DoxyParamCaption}\item[{\textbf{ movement} \&}]{m }\end{DoxyParamCaption})}
+
+
+
+save a new move 
+

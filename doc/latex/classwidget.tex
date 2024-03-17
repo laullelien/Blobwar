@@ -1,0 +1,164 @@
+\doxysection{widget Class Reference}
+\label{classwidget}\index{widget@{widget}}
+
+
+{\ttfamily \#include $<$widget.\+h$>$}
+
+
+
+Inheritance diagram for widget\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{classwidget__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ widget} ()
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+virtual \textbf{ $\sim$widget} ()
+\begin{DoxyCompactList}\small\item\em destructor \end{DoxyCompactList}\item 
+virtual void \textbf{ display} ()
+\begin{DoxyCompactList}\small\item\em display ourselves \end{DoxyCompactList}\item 
+void \textbf{ hide} ()
+\begin{DoxyCompactList}\small\item\em prevent widget from being displayed \end{DoxyCompactList}\item 
+void \textbf{ show} ()
+\begin{DoxyCompactList}\small\item\em allow widget to be displayed \end{DoxyCompactList}\item 
+bool \textbf{ is\+\_\+hidden} ()
+\begin{DoxyCompactList}\small\item\em is the widget hidden or not ? \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+position} (SDL\+\_\+\+Rect new\+\_\+position)
+\begin{DoxyCompactList}\small\item\em modify position \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+fullscreen} ()
+\begin{DoxyCompactList}\small\item\em modify position so our widget occupies all screen \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+SDL\+\_\+\+Rect \textbf{ position}
+\begin{DoxyCompactList}\small\item\em position on screen \end{DoxyCompactList}\item 
+bool \textbf{ hidden}
+\begin{DoxyCompactList}\small\item\em is the widget hidden yes or no ? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+a widget is just basically something with a position and that can be displayed 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{classwidget_a7b994e4142b36a4b111ce9150db04769}} 
+\index{widget@{widget}!widget@{widget}}
+\index{widget@{widget}!widget@{widget}}
+\doxysubsubsection{widget()}
+{\footnotesize\ttfamily widget\+::widget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+constructor 
+
+\mbox{\label{classwidget_afa7adaea8440790c07c12047c028251d}} 
+\index{widget@{widget}!````~widget@{$\sim$widget}}
+\index{````~widget@{$\sim$widget}!widget@{widget}}
+\doxysubsubsection{$\sim$widget()}
+{\footnotesize\ttfamily widget\+::$\sim$widget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+destructor 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{classwidget_a5af8dad360f557857d78cf4fa6091357}} 
+\index{widget@{widget}!display@{display}}
+\index{display@{display}!widget@{widget}}
+\doxysubsubsection{display()}
+{\footnotesize\ttfamily void widget\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+display ourselves 
+
+
+
+Reimplemented in \textbf{ label} \doxyref{}{p.}{classlabel_a8f616cd7f0bdb0ffeefcd4b2adb633eb}, \textbf{ image} \doxyref{}{p.}{classimage_ae39a07798a1b4fccfe39800380f47a11}, \textbf{ button} \doxyref{}{p.}{classbutton_a9e3733fc9fdc6d200195558df1cd47f3}, \textbf{ board} \doxyref{}{p.}{classboard_a204adfa6b9b10c4cf14c9eebffa0f055}, and \textbf{ blob} \doxyref{}{p.}{classblob_a8b01cf55e1b2592d72010f6cc0fe6ec1}.
+
+\mbox{\label{classwidget_ad6d0b3646822cea31cee8d70a5424063}} 
+\index{widget@{widget}!hide@{hide}}
+\index{hide@{hide}!widget@{widget}}
+\doxysubsubsection{hide()}
+{\footnotesize\ttfamily void widget\+::hide (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+prevent widget from being displayed 
+
+\mbox{\label{classwidget_ae91caa33ed7decbeea28d28323156b49}} 
+\index{widget@{widget}!is\_hidden@{is\_hidden}}
+\index{is\_hidden@{is\_hidden}!widget@{widget}}
+\doxysubsubsection{is\_hidden()}
+{\footnotesize\ttfamily bool widget\+::is\+\_\+hidden (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+is the widget hidden or not ? 
+
+\mbox{\label{classwidget_af2fc4c3d22489ba1cdbf72dfbc2cd181}} 
+\index{widget@{widget}!set\_fullscreen@{set\_fullscreen}}
+\index{set\_fullscreen@{set\_fullscreen}!widget@{widget}}
+\doxysubsubsection{set\_fullscreen()}
+{\footnotesize\ttfamily void widget\+::set\+\_\+fullscreen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+modify position so our widget occupies all screen 
+
+\mbox{\label{classwidget_a79cd02105fa0e6a80aab4d84d92afeb6}} 
+\index{widget@{widget}!set\_position@{set\_position}}
+\index{set\_position@{set\_position}!widget@{widget}}
+\doxysubsubsection{set\_position()}
+{\footnotesize\ttfamily void widget\+::set\+\_\+position (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Rect}]{new\+\_\+position }\end{DoxyParamCaption})}
+
+
+
+modify position 
+
+\mbox{\label{classwidget_a45a457f31a80893c10f1527f8b9b68eb}} 
+\index{widget@{widget}!show@{show}}
+\index{show@{show}!widget@{widget}}
+\doxysubsubsection{show()}
+{\footnotesize\ttfamily void widget\+::show (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+allow widget to be displayed 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{classwidget_a322f9b05fa1a2a9711c36a58fbfbe9d1}} 
+\index{widget@{widget}!hidden@{hidden}}
+\index{hidden@{hidden}!widget@{widget}}
+\doxysubsubsection{hidden}
+{\footnotesize\ttfamily bool widget\+::hidden\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+is the widget hidden yes or no ? 
+
+\mbox{\label{classwidget_a0edd77259a2593b9353ccdc87155fcc4}} 
+\index{widget@{widget}!position@{position}}
+\index{position@{position}!widget@{widget}}
+\doxysubsubsection{position}
+{\footnotesize\ttfamily SDL\+\_\+\+Rect widget\+::position\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+position on screen 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ widget.\+h}\item 
+\textbf{ widget.\+cc}\end{DoxyCompactItemize}
