@@ -1,0 +1,7 @@
+.cache/
+doc/
+*.o
+blobwar
+launchStrategy
+
+
