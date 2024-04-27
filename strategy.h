@@ -1,6 +1,7 @@
 #ifndef __STRATEGY_H
 #define __STRATEGY_H
 
+#include "SDL_stdinc.h"
 #include "bidiarray.h"
 #include "common.h"
 #include "move.h"
@@ -8,7 +9,7 @@
 class Strategy {
    private:
     //! array containing all blobs on the board
-    bidiarray<Sint16> _blobs;
+    bidiarray<Sint8> _blobs;
     //! an array of booleans indicating for each cell whether it is a hole or
     //! not.
     const bidiarray<bool>& _holes;
@@ -20,16 +21,29 @@ class Strategy {
     //! Only the last move saved will be used.
     void (*_saveBestMove)(movement&);
 
+    // Function used to print values to the console
+    void (*_printToConsole)(string, Sint64);
+
+    // Array containing the score of both players
+    Sint32 _playerScore[2] = {0, 0};
+
    public:
     // Constructor from a current situation
     Strategy(bidiarray<Sint16>& blobs,
              const bidiarray<bool>& holes,
              const Uint16 current_player,
-             void (*saveBestMove)(movement&))
-        : _blobs(blobs),
-          _holes(holes),
+             void (*saveBestMove)(movement&),
+             void (*debugFunc)(string, Sint64))
+        : _holes(holes),
           _current_player(current_player),
-          _saveBestMove(saveBestMove) {}
+          _saveBestMove(saveBestMove),
+          _printToConsole(debugFunc) {
+        for (Sint8 i = 0; i < 8; ++i) {
+            for (Sint8 j = 0; j < 8; ++j) {
+                _blobs.set(i, j, blobs.get(i, j));
+            }
+        }
+    }
 
     // Copy constructor
     Strategy(const Strategy& St)
@@ -41,10 +55,22 @@ class Strategy {
     ~Strategy() {}
 
     /**
+     * Initializes the score of both players in score array.
+     * The score of a player is the number of blobs he has.
+     */
+    void initializeScores();
+
+    /**
      * Apply a move to the current state of blobs
      * Assumes that the move is valid
      */
     void applyMove(const movement& mv);
+
+    /**
+     * Returns a boolean that indicates whether the player
+     * can play in position (x, y)
+     */
+    bool isPositionValid(Sint8 x, Sint8 y) const;
 
     /**
      * Compute the vector containing every possible moves
@@ -60,6 +86,26 @@ class Strategy {
      * Find the best move.
      */
     void computeBestMove();
+
+    /**
+     * Finds a move using a greedy strategy
+     */
+    Sint32 computeGreedyMove();
+
+    /**
+     * Finds a move using the minmax algorithm
+     */
+    Sint32 computeMinMaxMove(Uint32 depth);
+
+    /**
+     * Increases the score of the player
+     */
+    void increaseScore(Uint16 player);
+
+    /**
+     * Decreases the score of the player
+     */
+    void decreaseScore(Uint16 player);
 };
 
 #endif

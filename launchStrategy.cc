@@ -19,6 +19,10 @@ void saveBestMoveToShmem(movement& m) {
     shmem_set(m);
 }
 
+void debugToConsole(string description, Sint64 value) {
+    cout << "DEBUGGING : " << description << ' ' << value << endl;
+}
+
 /** Main of launchStrategy
  * This executable is called automatically by blobwar to compute IA moves.
  * The args should be:
@@ -51,11 +55,12 @@ int main(int argc, char** argv) {
     int cplayer = atoi(argv[i++]);
     // std::cout << "player: "<<cplayer<<std::endl;
     void (*func)(movement&) = saveBestMoveToShmem;
+    void (*debugFunc)(string, Sint64) = debugToConsole;
 
     shmem_init();
     func = saveBestMoveToShmem;
 
-    Strategy strategy(blobs, holes, cplayer, func);
+    Strategy strategy(blobs, holes, cplayer, func, debugFunc);
     strategy.computeBestMove();
 
     return 0;

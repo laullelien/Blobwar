@@ -2,10 +2,14 @@
 #define __MOVE_H
 #include <SDL.h>
 
+#include <algorithm>
+
+#include "SDL_stdinc.h"
+
 /** Move class
  */
 struct movement {
-    movement() {}
+    movement() { ox = oy = nx = ny = 0; }
 
     movement(const movement& mv) : ox(mv.ox), oy(mv.oy), nx(mv.nx), ny(mv.ny) {}
     movement(const Uint8 oldx,
@@ -20,6 +24,12 @@ struct movement {
         nx = mv.nx;
         ny = mv.ny;
         return *this;
+    }
+
+    Uint8 distance() const {
+        Uint8 dx = std::abs(nx - ox);
+        Uint8 dy = std::abs(ny - oy);
+        return std::max(dx, dy);
     }
 
     Uint8 ox;

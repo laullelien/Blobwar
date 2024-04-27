@@ -1,5 +1,6 @@
 #ifndef BIDIARRAY
 #define BIDIARRAY
+#include "SDL_stdinc.h"
 #include "common.h"
 
 /** bidiarray class
@@ -12,6 +13,13 @@ class bidiarray {
 
    public:
     bidiarray() {}
+    bidiarray(const bidiarray& bidiarray) {
+        for (Uint8 x = 0; x < 8; ++x) {
+            for (Uint8 y = 0; y < 8; ++y) {
+                array[x][y] = bidiarray.get(x, y);
+            }
+        }
+    }
     ~bidiarray() {}
     void set(unsigned int x, unsigned int y, element_type value) {
         array[x][y] = value;
