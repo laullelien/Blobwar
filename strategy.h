@@ -3,7 +3,6 @@
 
 #include "SDL_stdinc.h"
 #include "bidiarray.h"
-#include "common.h"
 #include "move.h"
 
 class Strategy {
@@ -21,9 +20,6 @@ class Strategy {
     //! Only the last move saved will be used.
     void (*_saveBestMove)(movement&);
 
-    // Function used to print values to the console
-    void (*_printToConsole)(string, Sint64);
-
     // Array containing the score of both players
     Sint32 _playerScore[2] = {0, 0};
 
@@ -32,12 +28,10 @@ class Strategy {
     Strategy(bidiarray<Sint16>& blobs,
              const bidiarray<bool>& holes,
              const Uint16 current_player,
-             void (*saveBestMove)(movement&),
-             void (*debugFunc)(string, Sint64))
+             void (*saveBestMove)(movement&))
         : _holes(holes),
           _current_player(current_player),
-          _saveBestMove(saveBestMove),
-          _printToConsole(debugFunc) {
+          _saveBestMove(saveBestMove) {
         for (Sint8 i = 0; i < 8; ++i) {
             for (Sint8 j = 0; j < 8; ++j) {
                 _blobs.set(i, j, blobs.get(i, j));

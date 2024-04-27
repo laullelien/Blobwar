@@ -1,6 +1,7 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/types.h>
+#include <chrono>
 
 #include "shmem.h"
 #include "strategy.h"
@@ -17,10 +18,6 @@ void saveBestMoveToShmem(movement& m) {
     saveBestMoveToConsole(m);
 #endif
     shmem_set(m);
-}
-
-void debugToConsole(string description, Sint64 value) {
-    cout << "DEBUGGING : " << description << ' ' << value << endl;
 }
 
 /** Main of launchStrategy
@@ -55,13 +52,16 @@ int main(int argc, char** argv) {
     int cplayer = atoi(argv[i++]);
     // std::cout << "player: "<<cplayer<<std::endl;
     void (*func)(movement&) = saveBestMoveToShmem;
-    void (*debugFunc)(string, Sint64) = debugToConsole;
 
     shmem_init();
     func = saveBestMoveToShmem;
 
-    Strategy strategy(blobs, holes, cplayer, func, debugFunc);
+      auto start = std::chrono::high_resolution_clock::now();
+    Strategy strategy(blobs, holes, cplayer, func);
     strategy.computeBestMove();
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    cout << "Time taken to generate the AI move: " << duration.count() << " ms" << endl;
 
     return 0;
 }
