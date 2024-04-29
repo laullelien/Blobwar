@@ -9,6 +9,7 @@ static bool isInBound(Sint8 x, Sint8 y) {
     return x >= 0 && x < 8 && y >= 0 && y < 8;
 }
 
+// return a boolean indicating if the current player can place a blob at (x, y)
 bool Strategy::isPositionValid(Sint8 x, Sint8 y) const {
     return isInBound(x, y) && _blobs.get(x, y) == -1 && !_holes.get(x, y);
 }
@@ -23,6 +24,7 @@ void Strategy::decreaseScore(Uint16 player) {
 
 // AI points are counted positively, while the player's points are counted
 // negatively
+// The score of a player is its number of blobs
 void Strategy::initializeScores() {
     _playerScore[0] = 0;
     _playerScore[1] = 0;
@@ -64,7 +66,7 @@ void Strategy::applyMove(const movement& mv) {
 }
 
 Sint32 Strategy::estimateCurrentScore() const {
-    return _playerScore[_current_player];
+    return _playerScore[0] + _playerScore[1];
     //TODO: take into account infinite loops
 }
 
