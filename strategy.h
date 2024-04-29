@@ -90,16 +90,6 @@ class Strategy {
      * Finds a move using the minmax algorithm
      */
     Sint32 computeMinMaxMove(Uint32 depth);
-
-    /**
-     * Increases the score of the player
-     */
-    void increaseScore(Uint16 player);
-
-    /**
-     * Decreases the score of the player
-     */
-    void decreaseScore(Uint16 player);
 };
 
 #endif

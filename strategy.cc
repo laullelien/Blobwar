@@ -1,6 +1,5 @@
 #include "strategy.h"
 
-#include <cassert>
 #include <cstdint>
 
 #include "SDL_stdinc.h"
@@ -9,21 +8,10 @@ static bool isInBound(Sint8 x, Sint8 y) {
     return x >= 0 && x < 8 && y >= 0 && y < 8;
 }
 
-// return a boolean indicating if the current player can place a blob at (x, y)
 bool Strategy::isPositionValid(Sint8 x, Sint8 y) const {
     return isInBound(x, y) && _blobs.get(x, y) == -1 && !_holes.get(x, y);
 }
 
-void Strategy::increaseScore(Uint16 player) {
-    _playerScore[player] += 1 - ((player ^ 1) << 1);
-}
-
-void Strategy::decreaseScore(Uint16 player) {
-    _playerScore[player] -= 1 - ((player ^ 1) << 1);
-}
-
-// AI points are counted positively, while the player's points are counted
-// negatively
 // The score of a player is its number of blobs
 void Strategy::initializeScores() {
     _playerScore[0] = 0;
@@ -32,7 +20,7 @@ void Strategy::initializeScores() {
         for (Uint8 y = 0; y < 8; ++y) {
             Sint16 cellValue = _blobs.get(x, y);
             if (cellValue != -1) {
-                increaseScore(cellValue);
+                ++_playerScore[cellValue];
             }
         }
     }
@@ -40,12 +28,12 @@ void Strategy::initializeScores() {
 
 void Strategy::applyMove(const movement& mv) {
     if (mv.distance() == 1) {
-        _blobs.set(mv.nx, mv.ny, _current_player);
-        increaseScore(_current_player);
+        ++_playerScore[_current_player];
     } else {
         _blobs.set(mv.ox, mv.oy, -1);
-        _blobs.set(mv.nx, mv.ny, _current_player);
     }
+    _blobs.set(mv.nx, mv.ny, _current_player);
+
     for (Sint8 dx = -1; dx <= 1; ++dx) {
         for (Sint8 dy = -1; dy <= 1; ++dy) {
             Sint8 neighbourX = mv.nx + dx;
@@ -53,12 +41,12 @@ void Strategy::applyMove(const movement& mv) {
 
             if (isInBound(neighbourX, neighbourY)) {
                 Sint16 cellValue = _blobs.get(neighbourX, neighbourY);
-                Sint16 opponent_player = _current_player ^ 1;
+                Sint16 _opponent_player = _current_player ^ 1;
 
-                if (cellValue == opponent_player) {
-                    decreaseScore(opponent_player);
+                if (cellValue == _opponent_player) {
+                    --_playerScore[_opponent_player];
                     _blobs.set(neighbourX, neighbourY, _current_player);
-                    increaseScore(_current_player);
+                    ++_playerScore[_current_player];
                 }
             }
         }
@@ -66,7 +54,7 @@ void Strategy::applyMove(const movement& mv) {
 }
 
 Sint32 Strategy::estimateCurrentScore() const {
-    return _playerScore[0] + _playerScore[1];
+    return _playerScore[_current_player] - _playerScore[_current_player ^ 1];
     // TODO: take into account infinite loops
 }
 
@@ -90,7 +78,7 @@ vector<movement>& Strategy::computeValidMoves(
 }
 
 movement mov;
-Uint32 minMaxDepth = 4;
+Uint32 minMaxDepth = 1;
 
 void Strategy::computeBestMove() {
     initializeScores();
@@ -108,34 +96,28 @@ Sint32 Strategy::computeGreedyMove() {
     computeValidMoves(validMoves);
 
     movement bestMove;
-    Sint32 bestScore;
-    Sint32 factor;
-
-    if (_current_player) {
-        bestScore = INT32_MIN;
-        factor = 1;
-    } else {
-        bestScore = INT32_MAX;
-        factor = -1;
-    }
+    Sint32 bestScore = INT32_MIN;
 
     if (validMoves.size() == 0) {  // TODO: find value
         return bestScore;
     }
 
     for (auto mv : validMoves) {
+        // cout << "mv: " << (int)mv.ox << ' ' << (int)mv.oy << ' ' <<
+        // (int)mv.nx
+        //<< ' ' << (int)mv.ny << '\n';
         bidiarray<Sint8> temp_blobs = _blobs;
         Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
 
         applyMove(mv);
         Sint32 score = estimateCurrentScore();
+        // cout << "score: " << score << '\n';
 
         _blobs = temp_blobs;
         _playerScore[0] = prevScore[0];
         _playerScore[1] = prevScore[1];
 
-        if (factor * score >
-            factor * bestScore) {  // convert > into < for player
+        if (score > bestScore) {
             bestScore = score;
             bestMove = mv;
         }
@@ -163,12 +145,18 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
             applyMove(mv);
             _current_player ^= 1;
             Sint32 score = -computeMinMaxMove(depth - 1);
-            if (score > bestScore) {  // convert > into < for player
+            if (score > bestScore) {
                 bestScore = score;
                 if (depth == minMaxDepth) {
                     _saveBestMove(mv);
                 }
             }
+
+            // if (depth == minMaxDepth) {
+            //   cout << "mv: " << (int)mv.ox << ' ' << (int)mv.oy << ' '
+            //<< (int)mv.nx << ' ' << (int)mv.ny << '\n';
+            // cout << "score: " << score << '\n';
+            //}
 
             _blobs = temp_blobs;
             _playerScore[0] = prevScore[0];
