@@ -64,7 +64,8 @@ void Strategy::applyMove(const movement& mv) {
 }
 
 Sint32 Strategy::estimateCurrentScore() const {
-    return _playerScore[0] + _playerScore[1];
+    return _playerScore[_current_player];
+    //TODO: take into account infinite loops
 }
 
 vector<movement>& Strategy::computeValidMoves(
@@ -87,6 +88,7 @@ vector<movement>& Strategy::computeValidMoves(
 }
 
 movement mov;
+Uint32 minMaxDepth = 4;
 
 void Strategy::computeBestMove() {
     initializeScores();
@@ -95,7 +97,7 @@ void Strategy::computeBestMove() {
     _saveBestMove(mov);
 #endif
 #ifdef _MINMAX
-    computeMinMaxMove(0);
+    computeMinMaxMove(minMaxDepth);
 #endif
 }
 
@@ -106,6 +108,7 @@ Sint32 Strategy::computeGreedyMove() {
     movement bestMove;
     Sint32 bestScore;
     Sint32 factor;
+
     if (_current_player) {
         bestScore = INT32_MIN;
         factor = 1;
@@ -114,7 +117,7 @@ Sint32 Strategy::computeGreedyMove() {
         factor = -1;
     }
 
-    if (validMoves.size() == 0) {
+    if (validMoves.size() == 0) { // TODO: find value
         return bestScore;
     }
 
@@ -140,9 +143,8 @@ Sint32 Strategy::computeGreedyMove() {
     return bestScore;
 }
 
-#define MAX_DEPTH 4
 Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
-    if (depth == MAX_DEPTH) {
+    if (depth == 0) {
         Sint32 score = computeGreedyMove();
         _current_player ^= 1;
         return score;
@@ -166,10 +168,10 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
 
             applyMove(mv);
             _current_player ^= 1;
-            Sint32 score = computeMinMaxMove(depth + 1);
-            if (factor * score > factor * bestScore) {
+            Sint32 score = computeMinMaxMove(depth - 1);
+            if (factor * score > factor * bestScore) { // convert > into < for player
                 bestScore = score;
-                if (depth == 0) {
+                if (depth == minMaxDepth) {
                     _saveBestMove(mv);
                 }
             }
