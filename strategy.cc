@@ -67,7 +67,7 @@ void Strategy::applyMove(const movement& mv) {
 
 Sint32 Strategy::estimateCurrentScore() const {
     return _playerScore[0] + _playerScore[1];
-    //TODO: take into account infinite loops
+    // TODO: take into account infinite loops
 }
 
 vector<movement>& Strategy::computeValidMoves(
@@ -119,7 +119,7 @@ Sint32 Strategy::computeGreedyMove() {
         factor = -1;
     }
 
-    if (validMoves.size() == 0) { // TODO: find value
+    if (validMoves.size() == 0) {  // TODO: find value
         return bestScore;
     }
 
@@ -154,15 +154,7 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
         vector<movement> validMoves;
         computeValidMoves(validMoves);
 
-        Sint32 bestScore;
-        Sint32 factor;
-        if (_current_player) {
-            bestScore = INT32_MIN;
-            factor = 1;
-        } else {
-            bestScore = INT32_MAX;
-            factor = -1;
-        }
+        Sint32 bestScore = INT32_MIN;
 
         for (auto mv : validMoves) {
             bidiarray<Sint8> temp_blobs = _blobs;
@@ -170,8 +162,8 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
 
             applyMove(mv);
             _current_player ^= 1;
-            Sint32 score = computeMinMaxMove(depth - 1);
-            if (factor * score > factor * bestScore) { // convert > into < for player
+            Sint32 score = -computeMinMaxMove(depth - 1);
+            if (score > bestScore) {  // convert > into < for player
                 bestScore = score;
                 if (depth == minMaxDepth) {
                     _saveBestMove(mv);
