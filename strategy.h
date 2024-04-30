@@ -70,6 +70,11 @@ class Strategy {
      * Compute the vector containing every possible moves
      */
     vector<movement>& computeValidMoves(vector<movement>& valid_moves) const;
+    
+    /**
+     * Returns a boolean indicating if the player can move
+     */
+    bool canMove(Uint16 player) const;
 
     /**
      * Estimate the score of the current state of the game
@@ -90,6 +95,11 @@ class Strategy {
      * Finds a move using the minmax algorithm
      */
     Sint32 computeMinMaxMove(Uint32 depth);
+
+    /**
+     * Finds a move using the minmax algorithm
+     */
+    Sint32 computeMinMaxAlphaBetaMove(Uint32 depth, Sint32 alpha, Sint32 beta);
 };
 
 #endif

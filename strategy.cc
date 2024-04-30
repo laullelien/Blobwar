@@ -18,7 +18,7 @@ void Strategy::initializeScores() {
     _playerScore[1] = 0;
     for (Uint8 x = 0; x < 8; ++x) {
         for (Uint8 y = 0; y < 8; ++y) {
-            Sint16 cellValue = _blobs.get(x, y);
+            Sint8 cellValue = _blobs.get(x, y);
             if (cellValue != -1) {
                 ++_playerScore[cellValue];
             }
@@ -40,8 +40,8 @@ void Strategy::applyMove(const movement& mv) {
             Sint8 neighbourY = mv.ny + dy;
 
             if (isInBound(neighbourX, neighbourY)) {
-                Sint16 cellValue = _blobs.get(neighbourX, neighbourY);
-                Sint16 _opponent_player = _current_player ^ 1;
+                Sint8 cellValue = _blobs.get(neighbourX, neighbourY);
+                Sint8 _opponent_player = _current_player ^ 1;
 
                 if (cellValue == _opponent_player) {
                     --_playerScore[_opponent_player];
@@ -55,7 +55,6 @@ void Strategy::applyMove(const movement& mv) {
 
 Sint32 Strategy::estimateCurrentScore() const {
     return _playerScore[_current_player] - _playerScore[_current_player ^ 1];
-    // TODO: take into account infinite loops
 }
 
 vector<movement>& Strategy::computeValidMoves(
@@ -77,8 +76,28 @@ vector<movement>& Strategy::computeValidMoves(
     return validMoves;
 }
 
+bool Strategy::canMove(Uint16 player) const {
+    for (Sint8 x = 0; x < 8; ++x) {
+        for (Sint8 y = 0; y < 8; ++y) {
+            if (_blobs.get(x, y) == player) {
+                for (Sint8 dx = -2; dx <= 2; ++dx) {
+                    for (Sint8 dy = -2; dy <= 2; ++dy) {
+                        if (isPositionValid(x + dx, y + dy)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
 movement mov;
-Uint32 minMaxDepth = 1;
+Uint32 minMaxDepth = 3;
+Uint32 minMaxAlphaBetaDepth = 3;
+Sint32 inf = 1000000;
+int calculatedMoves = 0;
 
 void Strategy::computeBestMove() {
     initializeScores();
@@ -89,29 +108,30 @@ void Strategy::computeBestMove() {
 #ifdef _MINMAX
     computeMinMaxMove(minMaxDepth);
 #endif
+#ifdef _MINMAXALPHABETA
+    computeMinMaxAlphaBetaMove(minMaxAlphaBetaDepth, -inf, inf);
+#endif
+    cout << "Numbers of move calculated: " << calculatedMoves << '\n';
 }
 
 Sint32 Strategy::computeGreedyMove() {
+    ++calculatedMoves;
     vector<movement> validMoves;
     computeValidMoves(validMoves);
 
     movement bestMove;
-    Sint32 bestScore = INT32_MIN;
+    Sint32 bestScore = -inf;
 
-    if (validMoves.size() == 0) {  // TODO: find value
-        return bestScore;
+    if (validMoves.size() == 0) {
+        return estimateCurrentScore();
     }
 
     for (auto mv : validMoves) {
-        // cout << "mv: " << (int)mv.ox << ' ' << (int)mv.oy << ' ' <<
-        // (int)mv.nx
-        //<< ' ' << (int)mv.ny << '\n';
         bidiarray<Sint8> temp_blobs = _blobs;
         Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
 
         applyMove(mv);
         Sint32 score = estimateCurrentScore();
-        // cout << "score: " << score << '\n';
 
         _blobs = temp_blobs;
         _playerScore[0] = prevScore[0];
@@ -135,8 +155,23 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
     } else {
         vector<movement> validMoves;
         computeValidMoves(validMoves);
+        Sint32 bestScore = -inf;
 
-        Sint32 bestScore = INT32_MIN;
+        if (validMoves.size() == 0) {
+            bidiarray<Sint8> temp_blobs = _blobs;
+            Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
+
+            _current_player ^= 1;
+            Sint32 score = -computeMinMaxMove(depth - 1);
+
+            if (score > bestScore) {
+                bestScore = score;
+            }
+
+            _blobs = temp_blobs;
+            _playerScore[0] = prevScore[0];
+            _playerScore[1] = prevScore[1];
+        }
 
         for (auto mv : validMoves) {
             bidiarray<Sint8> temp_blobs = _blobs;
@@ -145,18 +180,13 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
             applyMove(mv);
             _current_player ^= 1;
             Sint32 score = -computeMinMaxMove(depth - 1);
+
             if (score > bestScore) {
                 bestScore = score;
                 if (depth == minMaxDepth) {
                     _saveBestMove(mv);
                 }
             }
-
-            // if (depth == minMaxDepth) {
-            //   cout << "mv: " << (int)mv.ox << ' ' << (int)mv.oy << ' '
-            //<< (int)mv.nx << ' ' << (int)mv.ny << '\n';
-            // cout << "score: " << score << '\n';
-            //}
 
             _blobs = temp_blobs;
             _playerScore[0] = prevScore[0];
@@ -165,5 +195,69 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
 
         _current_player ^= 1;
         return bestScore;
+    }
+}
+
+Sint32 Strategy::computeMinMaxAlphaBetaMove(Uint32 depth,
+                                            Sint32 alpha,
+                                            Sint32 beta) {
+    if (depth == 0) {
+        Sint32 score = computeGreedyMove();
+        _current_player ^= 1;
+        return score;
+    } else {
+        vector<movement> validMoves;
+        computeValidMoves(validMoves);
+
+        if (validMoves.size() == 0) {
+            bidiarray<Sint8> temp_blobs = _blobs;
+            Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
+
+            _current_player ^= 1;
+            Sint32 score =
+                -computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
+
+            _blobs = temp_blobs;
+            _playerScore[0] = prevScore[0];
+            _playerScore[1] = prevScore[1];
+
+            if (score > alpha) {
+                alpha = score;
+            }
+
+            if (score >= beta) {
+                _current_player ^= 1;
+                return beta;
+            }
+        }
+
+        for (auto mv : validMoves) {
+            bidiarray<Sint8> temp_blobs = _blobs;
+            Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
+
+            applyMove(mv);
+            _current_player ^= 1;
+            Sint32 score =
+                -computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
+
+            _blobs = temp_blobs;
+            _playerScore[0] = prevScore[0];
+            _playerScore[1] = prevScore[1];
+
+            if (score > alpha) {
+                alpha = score;
+                if (depth == minMaxAlphaBetaDepth) {
+                    _saveBestMove(mv);
+                }
+            }
+
+            if (score >= beta) {
+                _current_player ^= 1;
+                return beta;
+            }
+        }
+
+        _current_player ^= 1;
+        return alpha;
     }
 }
