@@ -152,50 +152,50 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
         Sint32 score = computeGreedyMove();
         _current_player ^= 1;
         return score;
-    } else {
-        vector<movement> validMoves;
-        computeValidMoves(validMoves);
-        Sint32 bestScore = -inf;
+    }
 
-        if (validMoves.size() == 0) {
-            bidiarray<Sint8> temp_blobs = _blobs;
-            Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
+    vector<movement> validMoves;
+    computeValidMoves(validMoves);
+    Sint32 bestScore = -inf;
 
-            _current_player ^= 1;
-            Sint32 score = -computeMinMaxMove(depth - 1);
-
-            if (score > bestScore) {
-                bestScore = score;
-            }
-
-            _blobs = temp_blobs;
-            _playerScore[0] = prevScore[0];
-            _playerScore[1] = prevScore[1];
-        }
-
-        for (auto mv : validMoves) {
-            bidiarray<Sint8> temp_blobs = _blobs;
-            Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
-
-            applyMove(mv);
-            _current_player ^= 1;
-            Sint32 score = -computeMinMaxMove(depth - 1);
-
-            if (score > bestScore) {
-                bestScore = score;
-                if (depth == minMaxDepth) {
-                    _saveBestMove(mv);
-                }
-            }
-
-            _blobs = temp_blobs;
-            _playerScore[0] = prevScore[0];
-            _playerScore[1] = prevScore[1];
-        }
+    if (validMoves.size() == 0) {
+        bidiarray<Sint8> temp_blobs = _blobs;
+        Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
 
         _current_player ^= 1;
-        return bestScore;
+        Sint32 score = -computeMinMaxMove(depth - 1);
+
+        if (score > bestScore) {
+            bestScore = score;
+        }
+
+        _blobs = temp_blobs;
+        _playerScore[0] = prevScore[0];
+        _playerScore[1] = prevScore[1];
     }
+
+    for (auto mv : validMoves) {
+        bidiarray<Sint8> temp_blobs = _blobs;
+        Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
+
+        applyMove(mv);
+        _current_player ^= 1;
+        Sint32 score = -computeMinMaxMove(depth - 1);
+
+        if (score > bestScore) {
+            bestScore = score;
+            if (depth == minMaxDepth) {
+                _saveBestMove(mv);
+            }
+        }
+
+        _blobs = temp_blobs;
+        _playerScore[0] = prevScore[0];
+        _playerScore[1] = prevScore[1];
+    }
+
+    _current_player ^= 1;
+    return bestScore;
 }
 
 Sint32 Strategy::computeMinMaxAlphaBetaMove(Uint32 depth,
@@ -205,59 +205,56 @@ Sint32 Strategy::computeMinMaxAlphaBetaMove(Uint32 depth,
         Sint32 score = computeGreedyMove();
         _current_player ^= 1;
         return score;
-    } else {
-        vector<movement> validMoves;
-        computeValidMoves(validMoves);
+    }
+    vector<movement> validMoves;
+    computeValidMoves(validMoves);
 
-        if (validMoves.size() == 0) {
-            bidiarray<Sint8> temp_blobs = _blobs;
-            Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
-
-            _current_player ^= 1;
-            Sint32 score =
-                -computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
-
-            _blobs = temp_blobs;
-            _playerScore[0] = prevScore[0];
-            _playerScore[1] = prevScore[1];
-
-            if (score > alpha) {
-                alpha = score;
-            }
-
-            if (score >= beta) {
-                _current_player ^= 1;
-                return beta;
-            }
-        }
-
-        for (auto mv : validMoves) {
-            bidiarray<Sint8> temp_blobs = _blobs;
-            Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
-
-            applyMove(mv);
-            _current_player ^= 1;
-            Sint32 score =
-                -computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
-
-            _blobs = temp_blobs;
-            _playerScore[0] = prevScore[0];
-            _playerScore[1] = prevScore[1];
-
-            if (score > alpha) {
-                alpha = score;
-                if (depth == minMaxAlphaBetaDepth) {
-                    _saveBestMove(mv);
-                }
-            }
-
-            if (score >= beta) {
-                _current_player ^= 1;
-                return beta;
-            }
-        }
+    if (validMoves.size() == 0) {
+        bidiarray<Sint8> temp_blobs = _blobs;
+        Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
 
         _current_player ^= 1;
-        return alpha;
+        Sint32 score = -computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
+
+        _blobs = temp_blobs;
+        _playerScore[0] = prevScore[0];
+        _playerScore[1] = prevScore[1];
+
+        if (score > alpha) {
+            alpha = score;
+        }
+
+        if (score >= beta) {
+            _current_player ^= 1;
+            return beta;
+        }
     }
+
+    for (auto mv : validMoves) {
+        bidiarray<Sint8> temp_blobs = _blobs;
+        Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
+
+        applyMove(mv);
+        _current_player ^= 1;
+        Sint32 score = -computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
+
+        _blobs = temp_blobs;
+        _playerScore[0] = prevScore[0];
+        _playerScore[1] = prevScore[1];
+
+        if (score > alpha) {
+            alpha = score;
+            if (depth == minMaxAlphaBetaDepth) {
+                _saveBestMove(mv);
+            }
+        }
+
+        if (score >= beta) {
+            _current_player ^= 1;
+            return beta;
+        }
+    }
+
+    _current_player ^= 1;
+    return alpha;
 }
