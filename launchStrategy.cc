@@ -1,6 +1,7 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/types.h>
+
 #include <chrono>
 
 #include "shmem.h"
@@ -56,12 +57,14 @@ int main(int argc, char** argv) {
     shmem_init();
     func = saveBestMoveToShmem;
 
-      auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::high_resolution_clock::now();
     Strategy strategy(blobs, holes, cplayer, func);
     strategy.computeBestMove();
     auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    cout << "Time taken to generate the AI move: " << duration.count() << " ms" << endl;
+    auto duration =
+        std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    cout << "Time taken to generate the AI move: " << duration.count() << " ms"
+         << endl;
 
     return 0;
 }

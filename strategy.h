@@ -39,12 +39,6 @@ class Strategy {
         }
     }
 
-    // Copy constructor
-    Strategy(const Strategy& St)
-        : _blobs(St._blobs),
-          _holes(St._holes),
-          _current_player(St._current_player) {}
-
     // Destructor
     ~Strategy() {}
 
@@ -70,11 +64,11 @@ class Strategy {
      * Compute the vector containing every possible moves
      */
     vector<movement>& computeValidMoves(vector<movement>& valid_moves) const;
-    
+
     /**
-     * Returns a boolean indicating if the player can move
+     * Returns the score associated to a move.
      */
-    bool canMove(Uint16 player) const;
+    Uint8 computeScore(movement& mv) const;
 
     /**
      * Estimate the score of the current state of the game
@@ -100,6 +94,13 @@ class Strategy {
      * Finds a move using the minmax algorithm
      */
     Sint32 computeMinMaxAlphaBetaMove(Uint32 depth, Sint32 alpha, Sint32 beta);
+
+    /**
+     * Finds a move using the minmax algorithm and parallelism
+     */
+    Sint32 computeMinMaxAlphaBetaParallelMove(Uint32 depth,
+                                              Sint32 alpha,
+                                              Sint32 beta);
 };
 
 #endif
