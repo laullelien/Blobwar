@@ -81,6 +81,11 @@ class Strategy {
     vector<movement>& computeValidMoves(vector<movement>& valid_moves) const;
 
     /**
+     * Compute the number of valid moves that both player can do. The value is stored using the parameters
+     */
+    void numberOfMoves(Sint32& firstPlayerMoves, Sint32& secondPlayerMoves) const;
+
+    /**
      * Returns the score associated to a move.
      */
     Uint8 computeScore(extendedMovement& mv) const;

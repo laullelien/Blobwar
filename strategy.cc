@@ -1,6 +1,7 @@
 #include "strategy.h"
 
 #include <future>
+#include <random>
 
 #include "SDL_stdinc.h"
 #include "move.h"
@@ -101,9 +102,39 @@ vector<movement>& Strategy::computeValidMoves(
         }
     }
 
+    shuffle(validMoves.begin(),
+            validMoves.end(),
+            std::default_random_engine(
+                std::chrono::system_clock::now().time_since_epoch().count()));
     sort(validMoves.begin(), validMoves.end(), compareMove);
 
     return validMoves;
+}
+
+void Strategy::numberOfMoves(Sint32& firstPlayerMoves,
+                             Sint32& secondPlayerMoves) const {
+    firstPlayerMoves = 0, secondPlayerMoves = 0;
+    for (Sint8 x = 0; x < 8; ++x) {
+        for (Sint8 y = 0; y < 8; ++y) {
+            if (_blobs.get(x, y) == 0) {
+                for (Sint8 dx = -2; dx <= 2; ++dx) {
+                    for (Sint8 dy = -2; dy <= 2; ++dy) {
+                        if (isPositionValid(x + dx, y + dy)) {
+                            ++firstPlayerMoves;
+                        }
+                    }
+                }
+            } else if (_blobs.get(x, y) == 1) {
+                for (Sint8 dx = -2; dx <= 2; ++dx) {
+                    for (Sint8 dy = -2; dy <= 2; ++dy) {
+                        if (isPositionValid(x + dx, y + dy)) {
+                            ++secondPlayerMoves;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 Sint32 inf = 1000000;
@@ -119,14 +150,14 @@ Uint32 minMaxAlphaBetaParallelDepth = 4;
 #ifdef _STAT
 atomic<Sint32> calculatedMoves;
 atomic<Sint32> moves;
-atomic<Sint32> player;
+atomic<Sint32> players;
 #endif
 
 void Strategy::computeBestMove() {
 #ifdef _STAT
     calculatedMoves = 0;
     moves = 0;
-    player = 0;
+    players = 0;
 #endif
     initializeScores();
 #ifdef _GREEDY
@@ -139,52 +170,60 @@ void Strategy::computeBestMove() {
     computeMinMaxAlphaBetaMove(minMaxAlphaBetaDepth, -inf, inf);
 #endif
 #ifdef _MINMAXALPHABETAPARALLEL
-    /*
-    minMaxAlphaBetaDepth = 1;
-    Sint32 plays = _playerScore[0] + _playerScore[1]; */
+    // Determine depth by estimating number of calculations
+    Sint64 maxBoards = 4000000000;
+    minMaxAlphaBetaParallelDepth = 0;
+    Sint32 moveNb[2];
+    numberOfMoves(moveNb[0], moveNb[1]);
+    if (moveNb[0] * moveNb[1] < 2) {
+        minMaxAlphaBetaParallelDepth = 4;
+        computeMinMaxAlphaBetaParallelMove(
+            minMaxAlphaBetaParallelDepth, -inf, inf);
+        return;
+    }
+    Sint64 plays = moveNb[0];
+    while (plays * moveNb[(minMaxAlphaBetaParallelDepth & 1) ^ 1] <=
+           maxBoards) {
+        ++minMaxAlphaBetaParallelDepth;
+        plays *= moveNb[minMaxAlphaBetaParallelDepth & 1];
+    }
+
+#ifdef _STAT
+    cout << "depth: " << minMaxAlphaBetaParallelDepth << endl;
+    cout << "estimation of the number of moves: " << plays << endl;
+#endif
+    minMaxAlphaBetaParallelDepth =
+        std::min(minMaxAlphaBetaParallelDepth, (Uint32)6);
     computeMinMaxAlphaBetaParallelMove(minMaxAlphaBetaParallelDepth, -inf, inf);
 #endif
 #ifdef _STAT
-    cout << "Numbers of move calculated: " << calculatedMoves << '\n';
-    cout << "Average number of move per blob " << moves / player << '\n';
+    cout << "numbers of calculated move : " << calculatedMoves << '\n';
+    cout << "numver of moves: " << moves << '\n';
+    cout << "numver of players: " << players << '\n';
+    cout << "average number of move per blob " << moves / players << '\n';
 #endif
 }
 
 Sint32 Strategy::computeGreedyMove() {
-#ifdef _STAT
-    calculatedMoves++;
-#endif
     vector<movement> validMoves;
     computeValidMoves(validMoves);
 
+#ifdef _STAT
+    calculatedMoves++;
+    moves += validMoves.size();
+    players += _playerScore[_current_player];
+#endif
+
     movement bestMove;
-    Sint32 bestScore = -inf;
 
     if (validMoves.size() == 0) {
         return estimateCurrentScore();
     }
 
-    for (auto mv : validMoves) {
-        bidiarray<Sint8> temp_blobs = _blobs;
-        Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
-
-        applyMove(mv);
-        Sint32 score = estimateCurrentScore();
-
-        _blobs = temp_blobs;
-        _playerScore[0] = prevScore[0];
-        _playerScore[1] = prevScore[1];
-
-        if (score > bestScore) {
-            bestScore = score;
-            bestMove = mv;
-        }
-    }
-
 #ifdef _GREEDY
-    _saveBestMove(bestMove);
+    _saveBestMove(validMoves[0]);
 #endif
-    return bestScore;
+    return estimateCurrentScore() + ((extendedMovement)(validMoves[0])).score;
 }
 
 Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
@@ -197,6 +236,11 @@ Sint32 Strategy::computeMinMaxMove(Uint32 depth) {
     vector<movement> validMoves;
     computeValidMoves(validMoves);
     Sint32 bestScore = -inf;
+
+#ifdef _STAT
+    moves += validMoves.size();
+    players += _playerScore[_current_player];
+#endif
 
     if (validMoves.size() == 0) {
         bidiarray<Sint8> temp_blobs = _blobs;
@@ -251,7 +295,7 @@ Sint32 Strategy::computeMinMaxAlphaBetaMove(Uint32 depth,
 
 #ifdef _STAT
     moves += validMoves.size();
-    player += _playerScore[_current_player];
+    players += _playerScore[_current_player];
 #endif
 
     if (validMoves.size() == 0) {
@@ -323,10 +367,11 @@ Sint32 Strategy::computeMinMaxAlphaBetaParallelMove(Uint32 depth,
 
     vector<movement> validMoves;
     computeValidMoves(validMoves);
+    cout << "size: " << validMoves.size() << '\n';
 
 #ifdef _STAT
     moves += validMoves.size();
-    player += _playerScore[_current_player];
+    players += _playerScore[_current_player];
 #endif
 
     Sint16 iterativeBranches = validMoves.size() / 4;
