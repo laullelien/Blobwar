@@ -1,6 +1,6 @@
 CC = g++
 
-CFLAGS = -Wall -Werror -O3 -g `sdl-config --cflags`  -Wno-strict-aliasing -DDEBUG -D_MINMAXALPHABETAPARALLEL
+CFLAGS = -Wall -Werror -O3 -g `sdl-config --cflags`  -Wno-strict-aliasing -DDEBUG -D_MINMAXALPHABETAPARALLEL -D_STAT
 
 LIBS = -lSDL_image -lSDL_ttf -lm `sdl-config --libs` -lSDL_net -lpthread
 
