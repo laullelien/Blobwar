@@ -164,14 +164,59 @@ void Strategy::computeBestMove() {
     computeGreedyMove();
 #endif
 #ifdef _MINMAX
+    // Determine depth by estimating number of calculations
+    Sint64 maxBoards = 20000000;
+    minMaxDepth = 0;
+    Sint32 moveNb[2];
+    numberOfMoves(moveNb[0], moveNb[1]);
+    if (moveNb[0] * moveNb[1] < 2) {
+        minMaxDepth = 4;
+        computeMinMaxMove(minMaxDepth);
+        return;
+    }
+    Sint64 plays = moveNb[0];
+    while (plays * moveNb[(minMaxDepth & 1) ^ 1] <= maxBoards) {
+        ++minMaxDepth;
+        plays *= moveNb[minMaxDepth & 1];
+    }
+
+    minMaxDepth = std::min(minMaxDepth, (Uint32)4);
+
+#ifdef _STAT
+    cout << "depth: " << minMaxDepth << endl;
+    cout << "estimation of the number of moves: " << plays << endl;
+#endif
     computeMinMaxMove(minMaxDepth);
 #endif
 #ifdef _MINMAXALPHABETA
+    // Determine depth by estimating number of calculations
+    Sint64 maxBoards = 8000000000;
+    minMaxAlphaBetaDepth = 0;
+    Sint32 moveNb[2];
+    numberOfMoves(moveNb[0], moveNb[1]);
+    if (moveNb[0] * moveNb[1] < 2) {
+        minMaxAlphaBetaDepth = 4;
+        computeMinMaxAlphaBetaMove(minMaxAlphaBetaDepth, -inf, inf);
+        return;
+    }
+    Sint64 plays = moveNb[0];
+    while (plays * moveNb[(minMaxAlphaBetaDepth & 1) ^ 1] <= maxBoards) {
+        ++minMaxAlphaBetaDepth;
+        plays *= moveNb[minMaxAlphaBetaDepth & 1];
+    }
+
+    minMaxAlphaBetaDepth = std::min(minMaxAlphaBetaDepth, (Uint32)6);
+
+#ifdef _STAT
+    cout << "depth: " << minMaxAlphaBetaDepth << endl;
+    cout << "estimation of the number of moves: " << plays << endl;
+#endif
+
     computeMinMaxAlphaBetaMove(minMaxAlphaBetaDepth, -inf, inf);
 #endif
 #ifdef _MINMAXALPHABETAPARALLEL
     // Determine depth by estimating number of calculations
-    Sint64 maxBoards = 4000000000;
+    Sint64 maxBoards = 8000000000;
     minMaxAlphaBetaParallelDepth = 0;
     Sint32 moveNb[2];
     numberOfMoves(moveNb[0], moveNb[1]);
@@ -188,12 +233,14 @@ void Strategy::computeBestMove() {
         plays *= moveNb[minMaxAlphaBetaParallelDepth & 1];
     }
 
+    minMaxAlphaBetaParallelDepth =
+        std::min(minMaxAlphaBetaParallelDepth, (Uint32)6);
+
 #ifdef _STAT
     cout << "depth: " << minMaxAlphaBetaParallelDepth << endl;
     cout << "estimation of the number of moves: " << plays << endl;
 #endif
-    minMaxAlphaBetaParallelDepth =
-        std::min(minMaxAlphaBetaParallelDepth, (Uint32)6);
+
     computeMinMaxAlphaBetaParallelMove(minMaxAlphaBetaParallelDepth, -inf, inf);
 #endif
 #ifdef _STAT
