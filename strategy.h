@@ -4,6 +4,7 @@
 #include "SDL_stdinc.h"
 #include "bidiarray.h"
 #include "move.h"
+#include "extendedMovement.h"
 
 class Strategy {
    private:
@@ -39,6 +40,15 @@ class Strategy {
         }
     }
 
+    // Copy constructor
+    Strategy(const Strategy& St)
+        : _blobs(St._blobs),
+          _holes(St._holes),
+          _current_player(St._current_player) {
+        _playerScore[0] = St._playerScore[0];
+        _playerScore[1] = St._playerScore[1];
+    }
+
     // Destructor
     ~Strategy() {}
 
@@ -47,6 +57,11 @@ class Strategy {
      * The score of a player is the number of blobs he has.
      */
     void initializeScores();
+
+    /**
+     * Set _current_player to the opponent player of the current player
+     */
+    void switchPlayer();
 
     /**
      * Apply a move to the current state of blobs
@@ -68,7 +83,7 @@ class Strategy {
     /**
      * Returns the score associated to a move.
      */
-    Uint8 computeScore(movement& mv) const;
+    Uint8 computeScore(extendedMovement& mv) const;
 
     /**
      * Estimate the score of the current state of the game

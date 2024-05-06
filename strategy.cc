@@ -1,7 +1,5 @@
 #include "strategy.h"
 
-#include <algorithm>
-#include <cassert>
 #include <future>
 
 #include "SDL_stdinc.h"
@@ -29,8 +27,10 @@ void Strategy::initializeScores() {
     }
 }
 
+void Strategy::switchPlayer() { _current_player ^= 1; }
+
 void Strategy::applyMove(const movement& mv) {
-    if (mv.distance == 1) {
+    if (mv.distance() == 1) {
         ++_playerScore[_current_player];
     } else {
         _blobs.set(mv.ox, mv.oy, -1);
@@ -60,7 +60,7 @@ Sint32 Strategy::estimateCurrentScore() const {
     return _playerScore[_current_player] - _playerScore[_current_player ^ 1];
 }
 
-Uint8 Strategy::computeScore(movement& mv) const {
+Uint8 Strategy::computeScore(extendedMovement& mv) const {
     Uint16 score = mv.distance == 1;
 
     Sint8 _opponent_player = _current_player ^ 1;
@@ -79,7 +79,9 @@ Uint8 Strategy::computeScore(movement& mv) const {
     return score;
 }
 
-bool compareMove(movement& a, movement& b) { return a.score > b.score; }
+bool compareMove(const extendedMovement& a, const extendedMovement& b) {
+    return a.score > b.score;
+}
 
 vector<movement>& Strategy::computeValidMoves(
     vector<movement>& validMoves) const {
@@ -89,8 +91,9 @@ vector<movement>& Strategy::computeValidMoves(
                 for (Sint8 dx = -2; dx <= 2; ++dx) {
                     for (Sint8 dy = -2; dy <= 2; ++dy) {
                         if (isPositionValid(x + dx, y + dy)) {
-                            validMoves.push_back(
-                                movement(x, y, x + dx, y + dy));
+                            auto mv = extendedMovement(x, y, x + dx, y + dy);
+                            mv.score = computeScore(mv);
+                            validMoves.push_back(mv);
                         }
                     }
                 }
@@ -98,9 +101,6 @@ vector<movement>& Strategy::computeValidMoves(
         }
     }
 
-    for (auto& mv : validMoves) {
-        mv.score = computeScore(mv);
-    }
     sort(validMoves.begin(), validMoves.end(), compareMove);
 
     return validMoves;
@@ -113,10 +113,9 @@ atomic<Sint32> calculatedMoves;
 
 Uint32 minMaxDepth = 3;
 
-Uint32 minMaxAlphaBetaDepth = 6;
+Uint32 minMaxAlphaBetaDepth = 5;
 
-Uint32 minMaxAlphaBetaParallelDepth = 1;
-Uint8 iterativeBranches = inf;
+Uint32 minMaxAlphaBetaParallelDepth = 5;
 
 void Strategy::computeBestMove() {
     calculatedMoves = 0;
@@ -261,9 +260,6 @@ Sint32 Strategy::computeMinMaxAlphaBetaMove(Uint32 depth,
         applyMove(mv);
         _current_player ^= 1;
         Sint32 score = -computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
-        if (depth == minMaxAlphaBetaDepth) {
-            cout << score << '\n';
-        }
 
         _blobs = temp_blobs;
         _playerScore[0] = prevScore[0];
@@ -286,12 +282,14 @@ Sint32 Strategy::computeMinMaxAlphaBetaMove(Uint32 depth,
     return alpha;
 }
 
-Sint32 launchThread(Strategy current_strategy,
-                    movement mv,
+Sint32 launchThread(Strategy* current_strategy,
+                    movement* mv,
                     Uint32 depth,
                     Sint32 alpha,
                     Sint32 beta) {
-    Strategy s = current_strategy;
+    Strategy s(*current_strategy);
+    s.applyMove(*mv);
+    s.switchPlayer();
     return -s.computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
 }
 
@@ -304,9 +302,7 @@ Sint32 Strategy::computeMinMaxAlphaBetaParallelMove(Uint32 depth,
     vector<movement> validMoves;
     computeValidMoves(validMoves);
 
-    if (iterativeBranches > validMoves.size()) {
-        iterativeBranches = validMoves.size();
-    }
+    Sint16 iterativeBranches = validMoves.size() / 4;
 
     // Compute some branches to try to get good alpha values
     for (Sint16 i = 0; i < iterativeBranches; ++i) {
@@ -314,23 +310,10 @@ Sint32 Strategy::computeMinMaxAlphaBetaParallelMove(Uint32 depth,
         bidiarray<Sint8> temp_blobs = _blobs;
         Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
 
-        _current_player ^= 1;
-        cout << "c1" << _current_player << '\n';
-        cout << "p1" << _playerScore[0] << ' ' << _playerScore[1] << '\n';
         applyMove(mv);
-        future<Sint32> f =
-            async(launch::async, launchThread, *this, mv, depth, alpha, beta);
-        Sint32 score1 = f.get();
-        cout << "c2" << _current_player << '\n';
-        cout << "p2" << _playerScore[0] << ' ' << _playerScore[1] << '\n';
+        _current_player ^= 1;
+
         Sint32 score = -computeMinMaxAlphaBetaMove(depth - 1, -beta, -alpha);
-        cout << "scores: " << score1 << ' ' << score << '\n';
-        if (score1 != score) {
-            auto mv = movement(-1, -1, -1, -1);
-            _saveBestMove(mv);
-        }
-        assert(score1 == score);
-        cout << score << '\n';
 
         _blobs = temp_blobs;
         _playerScore[0] = prevScore[0];
@@ -342,14 +325,12 @@ Sint32 Strategy::computeMinMaxAlphaBetaParallelMove(Uint32 depth,
         }
     }
 
-    _current_player ^= 1;
-
     vector<future<Sint32>> scoreFuture(validMoves.size() - iterativeBranches);
     for (size_t i = 0; i < validMoves.size() - iterativeBranches; ++i) {
         scoreFuture[i] = async(launch::async,
                                launchThread,
-                               *this,
-                               validMoves[i + iterativeBranches],
+                               this,
+                               &validMoves[i + iterativeBranches],
                                depth,
                                alpha,
                                beta);
@@ -357,7 +338,6 @@ Sint32 Strategy::computeMinMaxAlphaBetaParallelMove(Uint32 depth,
 
     for (size_t i = 0; i < validMoves.size() - iterativeBranches; ++i) {
         Sint32 score = scoreFuture[i].get();
-        cout << score << '\n';
         if (score > alpha) {
             alpha = score;
             _saveBestMove(validMoves[i + iterativeBranches]);
