@@ -141,11 +141,28 @@ Sint32 inf = 1000000;
 
 // Algorithm settings
 
-Uint32 minMaxDepth = 3;
+Uint32 minMaxDepth;
 
-Uint32 minMaxAlphaBetaDepth = 4;
+Uint32 minMaxAlphaBetaDepth;
 
-Uint32 minMaxAlphaBetaParallelDepth = 4;
+Uint32 minMaxAlphaBetaParallelDepth;
+
+Uint32 Strategy::estimateMaxDepth(Sint64 limit, Uint32& depth) const {
+    Uint32 d = 0;
+    Sint32 moveNb[2];
+    numberOfMoves(moveNb[0], moveNb[1]);
+    if (moveNb[0] * moveNb[1] < 2) {
+        depth = 4;
+        return 0;
+    }
+    Sint64 plays = moveNb[0];
+    while (plays * moveNb[(minMaxDepth & 1) ^ 1] <= limit) {
+        ++d;
+        plays *= moveNb[minMaxDepth & 1];
+    }
+    depth = min(d, 6U);
+    return plays;
+}
 
 #ifdef _STAT
 atomic<Sint32> calculatedMoves;
@@ -165,22 +182,8 @@ void Strategy::computeBestMove() {
 #endif
 #ifdef _MINMAX
     // Determine depth by estimating number of calculations
-    Sint64 maxBoards = 20000000;
-    minMaxDepth = 0;
-    Sint32 moveNb[2];
-    numberOfMoves(moveNb[0], moveNb[1]);
-    if (moveNb[0] * moveNb[1] < 2) {
-        minMaxDepth = 4;
-        computeMinMaxMove(minMaxDepth);
-        return;
-    }
-    Sint64 plays = moveNb[0];
-    while (plays * moveNb[(minMaxDepth & 1) ^ 1] <= maxBoards) {
-        ++minMaxDepth;
-        plays *= moveNb[minMaxDepth & 1];
-    }
-
-    minMaxDepth = std::min(minMaxDepth, (Uint32)4);
+    Sint64 maxBoards = 4000000;
+    Uint32 plays = estimateMaxDepth(maxBoards, minMaxDepth);
 
 #ifdef _STAT
     cout << "depth: " << minMaxDepth << endl;
@@ -191,21 +194,7 @@ void Strategy::computeBestMove() {
 #ifdef _MINMAXALPHABETA
     // Determine depth by estimating number of calculations
     Sint64 maxBoards = 8000000000;
-    minMaxAlphaBetaDepth = 0;
-    Sint32 moveNb[2];
-    numberOfMoves(moveNb[0], moveNb[1]);
-    if (moveNb[0] * moveNb[1] < 2) {
-        minMaxAlphaBetaDepth = 4;
-        computeMinMaxAlphaBetaMove(minMaxAlphaBetaDepth, -inf, inf);
-        return;
-    }
-    Sint64 plays = moveNb[0];
-    while (plays * moveNb[(minMaxAlphaBetaDepth & 1) ^ 1] <= maxBoards) {
-        ++minMaxAlphaBetaDepth;
-        plays *= moveNb[minMaxAlphaBetaDepth & 1];
-    }
-
-    minMaxAlphaBetaDepth = std::min(minMaxAlphaBetaDepth, (Uint32)6);
+    Uint32 plays = estimateMaxDepth(maxBoards, minMaxAlphaBetaDepth);
 
 #ifdef _STAT
     cout << "depth: " << minMaxAlphaBetaDepth << endl;
@@ -217,24 +206,8 @@ void Strategy::computeBestMove() {
 #ifdef _MINMAXALPHABETAPARALLEL
     // Determine depth by estimating number of calculations
     Sint64 maxBoards = 8000000000;
-    minMaxAlphaBetaParallelDepth = 0;
-    Sint32 moveNb[2];
-    numberOfMoves(moveNb[0], moveNb[1]);
-    if (moveNb[0] * moveNb[1] < 2) {
-        minMaxAlphaBetaParallelDepth = 4;
-        computeMinMaxAlphaBetaParallelMove(
-            minMaxAlphaBetaParallelDepth, -inf, inf);
-        return;
-    }
-    Sint64 plays = moveNb[0];
-    while (plays * moveNb[(minMaxAlphaBetaParallelDepth & 1) ^ 1] <=
-           maxBoards) {
-        ++minMaxAlphaBetaParallelDepth;
-        plays *= moveNb[minMaxAlphaBetaParallelDepth & 1];
-    }
-
-    minMaxAlphaBetaParallelDepth =
-        std::min(minMaxAlphaBetaParallelDepth, (Uint32)6);
+    minMaxAlphaBetaParallelDepth = Uint32 plays =
+        estimateMaxDepth(maxBoards, minMaxAlphaBetaParallelDepth);
 
 #ifdef _STAT
     cout << "depth: " << minMaxAlphaBetaParallelDepth << endl;

@@ -3,8 +3,8 @@
 
 #include "SDL_stdinc.h"
 #include "bidiarray.h"
-#include "move.h"
 #include "extendedMovement.h"
+#include "move.h"
 
 class Strategy {
    private:
@@ -81,9 +81,11 @@ class Strategy {
     vector<movement>& computeValidMoves(vector<movement>& valid_moves) const;
 
     /**
-     * Compute the number of valid moves that both player can do. The value is stored using the parameters
+     * Compute the number of valid moves that both player can do. The value is
+     * stored using the parameters
      */
-    void numberOfMoves(Sint32& firstPlayerMoves, Sint32& secondPlayerMoves) const;
+    void numberOfMoves(Sint32& firstPlayerMoves,
+                       Sint32& secondPlayerMoves) const;
 
     /**
      * Returns the score associated to a move.
@@ -94,6 +96,11 @@ class Strategy {
      * Estimate the score of the current state of the game
      */
     Sint32 estimateCurrentScore() const;
+
+    /**
+     * Estimates the maximal depth p so that the number of boards of depth p is less than limit.
+     */
+    Uint32 estimateMaxDepth(Sint64 limit, Uint32& depth) const;
 
     /**
      * Find the best move.
