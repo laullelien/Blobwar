@@ -426,6 +426,9 @@ Sint32 Strategy::computeMinMaxAlphaBetaParallelMove(Uint32 depth,
     // Compute some branches to try to get good alpha values
     for (Sint16 i = 0; i < iterativeBranches; ++i) {
         auto mv = validMoves[i];
+        if (i == 0) {
+            _saveBestMove(mv);
+        }
         bidiarray<Sint8> temp_blobs = _blobs;
         Sint32 prevScore[2] = {_playerScore[0], _playerScore[1]};
 
